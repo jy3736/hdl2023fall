@@ -1,0 +1,701 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>An Introduction to Hardware Description Languages - Verilog</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="bbe52dc3-7d82-4396-a253-68bf1f7c9c85" class="page sans"><header><img class="page-cover-image" src="An%20Introduction%20to%20Hardware%20Description%20Languages%20%20bbe52dc37d824396a25368bf1f7c9c85/3.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="An%20Introduction%20to%20Hardware%20Description%20Languages%20%20bbe52dc37d824396a25368bf1f7c9c85/yang01.png"/></div><h1 class="page-title">An Introduction to Hardware Description Languages - Verilog</h1><p class="page-description"></p><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><p id="36ae597d-4041-418f-860d-8bf244a23e76" class="">
+</p><h2 id="08422ef5-5235-4d4a-ac53-3c9aadded6d3" class="block-color-teal_background">References</h2><figure id="9a586c3a-0fc2-4890-ac37-6aaba1bd501e"><a  target="_blank" href="https://hdlbits.01xz.net/wiki/Main_Page" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">HDLBits</div><div class="bookmark-description">HDLBits is a collection of small circuit design exercises for practicing digital hardware design using Verilog Hardware Description Language (HDL). Earlier problems follow a tutorial style, while later problems will increasingly challenge your circuit design skills. Each problem requires you to design a small circuit in Verilog.</div></div><div class="bookmark-href">https://hdlbits.01xz.net/wiki/Main_Page</div></div><img src="https://hdlbits.01xz.net/mw/images/0/06/Logo_v.png" class="bookmark-image"/></a></figure><h2 id="e80a2c76-0d65-4742-a7f3-440596609538" class="block-color-teal_background">Course Content</h2><p id="e7d73ea2-715e-41eb-a51c-348d42c7f638" class="">
+</p><p id="d39a568e-9b16-4c10-9ead-8a543c97aa9c" class="block-color-gray_background">Definition of HDL (Hardware Description Language)</p><figure id="4341bbb2-7d0f-4d71-9755-7ce867469a3e"><div class="source"><a href="An%20Introduction%20to%20Hardware%20Description%20Languages%20%20bbe52dc37d824396a25368bf1f7c9c85/Definition_of_HDL_(Hardware_Description_Language).mp3">https://prod-files-secure.s3.us-west-2.amazonaws.com/5ba95bf4-8f68-4e65-9bdf-3668b6a9e90a/91262f8f-f8f8-4131-a18b-8d32be5e22cd/Definition_of_HDL_(Hardware_Description_Language).mp3</a></div></figure><p id="cc668d08-10f7-4fcd-9c55-3249bc673577" class="">A Hardware Description Language (HDL) is a specialized programming language used to describe the behavior and structure of digital circuits and systems. HDLs play a fundamental role in the design, simulation, and synthesis of digital hardware, allowing engineers to specify the functionality of electronic systems at various levels of abstraction. HDLs are an essential tool in modern digital design, enabling engineers to model complex digital systems and facilitate their implementation in hardware.</p><ol type="1" id="a56b181b-e109-468b-b729-e65a382598da" class="numbered-list" start="1"><li><strong>Behavior and Structure:</strong> HDLs provide a way to express both the behavior and structural aspects of digital circuits. This includes defining the logical operations, timing behavior, and interconnections of various hardware components.</li></ol><ol type="1" id="f2f6dc8c-4c12-4818-b2f1-8016783e0d15" class="numbered-list" start="2"><li><strong>Abstraction Levels:</strong> HDLs support different levels of abstraction, allowing engineers to describe a design from high-level behavioral descriptions down to low-level gate-level representations. This abstraction enables efficient communication and collaboration between design teams.</li></ol><ol type="1" id="c95e704a-bc12-43f2-ae79-6d3f2555962d" class="numbered-list" start="3"><li><strong>Simulation:</strong> One of the primary benefits of HDLs is their ability to simulate the behavior of a digital design before physical implementation. Engineers can create testbenches and simulate the behavior of the design under different conditions, identifying potential issues and bugs early in the design process.</li></ol><ol type="1" id="73b50e30-b311-45fc-8b5c-4a2e01ffcc58" class="numbered-list" start="4"><li><strong>Synthesis:</strong> HDLs are used as input for synthesis tools, which convert the high-level HDL description into gate-level representations suitable for fabrication in FPGA (Field-Programmable Gate Array) or ASIC (Application-Specific Integrated Circuit) technologies.</li></ol><ol type="1" id="991fe7b3-aeca-4710-9a75-36ed661f9630" class="numbered-list" start="5"><li><strong>Design Reusability:</strong> HDLs facilitate design reusability by allowing engineers to create modular components that can be easily integrated into larger systems. This modular approach accelerates the design process and promotes efficient collaboration.</li></ol><ol type="1" id="ec5dd2da-daff-461e-b029-b0bba3f0ba41" class="numbered-list" start="6"><li><strong>Standardization:</strong> HDLs, such as Verilog and VHDL, have become industry-standard languages for hardware description. This standardization ensures compatibility and portability across different tools and platforms.</li></ol><p id="704ee818-0ec3-4133-8138-2978622ead12" class="">
+</p><p id="724c3fa9-ed46-4693-ac78-92d0a810ac88" class="block-color-gray_background">Concise Introduction to Verilog</p><figure id="5ad01f46-ecb3-4582-9360-c8aa6fe59ed2"><div class="source"><a href="An%20Introduction%20to%20Hardware%20Description%20Languages%20%20bbe52dc37d824396a25368bf1f7c9c85/Concise_Introduction_to_Verilog.mp3">https://prod-files-secure.s3.us-west-2.amazonaws.com/5ba95bf4-8f68-4e65-9bdf-3668b6a9e90a/4cf7a5b5-0d74-408f-97bc-0ea43c2951bc/Concise_Introduction_to_Verilog.mp3</a></div></figure><p id="722b13fa-b806-4446-a79a-7ddfc475ec29" class="">Verilog is a hardware description language (HDL) used in electronic design and engineering. It serves as a standardized way to describe and design digital circuits and systems. Verilog is particularly popular in the field of digital integrated circuit (IC) design.</p><p id="98137631-370c-4a45-a12a-183a26877e1e" class="">In essence, Verilog allows engineers to create a high-level representation of a digital circuit&#x27;s functionality. This representation can then be synthesized into a lower-level hardware description that can be implemented in various hardware platforms, such as field-programmable gate arrays (FPGAs) or application-specific integrated circuits (ASICs).</p><p id="9fdfc0f3-370a-419d-bc24-30e5890d7d41" class="">Verilog is used for a range of purposes in electronic design, including:</p><ol type="1" id="13f8b0f2-4019-434f-8020-7cc0f4efcf16" class="numbered-list" start="1"><li><strong>Digital Circuit Design</strong>: Engineers use Verilog to design digital circuits, specifying how components like logic gates, flip-flops, and multiplexers should behave and interact.</li></ol><ol type="1" id="1711a85c-0232-4946-9335-8470ff34598e" class="numbered-list" start="2"><li><strong>Simulation</strong>: Verilog code can be simulated to test and verify the functionality of a design before physically implementing it. This helps in identifying and resolving issues early in the design process.</li></ol><ol type="1" id="224c162e-bba8-41f2-9185-da06444029ff" class="numbered-list" start="3"><li><strong>Synthesis</strong>: Verilog can be synthesized into a netlist or gate-level description that can be used to program FPGAs or generate mask patterns for ASIC fabrication.</li></ol><ol type="1" id="672004f5-c861-4d89-8ec4-86c2f0a2ad9e" class="numbered-list" start="4"><li><strong>Verification</strong>: Verilog is essential for creating testbenches and verifying that a digital design meets its intended specifications and functions correctly.</li></ol><ol type="1" id="d2b359d9-0d4e-4546-a82a-9ec8f2aa1504" class="numbered-list" start="5"><li><strong>System Modeling</strong>: It is also used for modeling and simulating complex digital systems, including embedded systems and processors.</li></ol><p id="e3bc872e-121a-4748-9a79-48b0759a7f3e" class="">Overall, Verilog is a crucial tool in the development of digital hardware, enabling engineers to design, test, and implement digital circuits efficiently and accurately.</p><h3 id="5e558e8f-cf15-4dd3-9570-1ca8e188f5ff" class="block-color-gray_background">Learning the Basics with a Verilog Example</h3><figure id="fe6b9224-dec2-4c5a-b10b-02a2c4365d31"><div class="source"><a href="An%20Introduction%20to%20Hardware%20Description%20Languages%20%20bbe52dc37d824396a25368bf1f7c9c85/Learning_the_Basics_with_a_Verilog_Example.mp3">https://prod-files-secure.s3.us-west-2.amazonaws.com/5ba95bf4-8f68-4e65-9bdf-3668b6a9e90a/500c2ad3-aba2-4d96-bf1c-a1871635216d/Learning_the_Basics_with_a_Verilog_Example.mp3</a></div></figure><p id="3e51cf63-8456-405e-9ae3-b7f3456eef9a" class="">Verilog Example:</p><pre id="809275b5-c3ff-4dce-8646-c347a821050c" class="code"><code>module and_gate(
+    input a, // Signal a
+    input b, // Signal b
+    output y // Signal y
+);
+    assign y = a &amp; b; // AND operation between signal a and signal b, result stored in signal y
+endmodule</code></pre><p id="496a71b1-bd97-4d85-aca7-c9e392af5e3e" class="">This Verilog code defines a simple AND gate module called &quot;and_gate.&quot; Let&#x27;s break down the code step by step:</p><ol type="1" id="e219c0d9-3675-4955-a250-68de238da607" class="numbered-list" start="1"><li><code>module and_gate(</code>: This line begins the module definition for the AND gate. It specifies the module&#x27;s name as &quot;and_gate&quot; and lists its input and output ports within parentheses.</li></ol><ol type="1" id="41d221f8-8153-4720-ae22-5f8efb595f6a" class="numbered-list" start="2"><li><code>input a, // Signal a</code>: This line declares an input port named &quot;a.&quot; The comment indicates that this input corresponds to a signal named &quot;a.&quot; In Verilog, &quot;input&quot; declares an input port, and in this case, it represents one of the inputs to the AND gate.</li></ol><ol type="1" id="efb3c0c2-474f-46a3-8789-8abcd7e397c3" class="numbered-list" start="3"><li><code>input b, // Signal b</code>: Similarly, this line declares another input port named &quot;b,&quot; which corresponds to a signal named &quot;b.&quot; It represents the second input to the AND gate.</li></ol><ol type="1" id="49c023a3-f40c-46c5-a834-42e9e224535b" class="numbered-list" start="4"><li><code>output y // Signal y</code>: This line declares an output port named &quot;y,&quot; which corresponds to a signal named &quot;y.&quot; It represents the output of the AND gate, where the result will be stored.</li></ol><ol type="1" id="fed16b23-f7cb-40a2-81c2-d63d6bd9ed50" class="numbered-list" start="5"><li><code>);</code>: This parenthesis closes the list of input and output ports.</li></ol><ol type="1" id="d36d0dc9-2fa6-47ab-8331-9f51cfea0c65" class="numbered-list" start="6"><li><code>assign y = a &amp; b;</code>: Inside the module, this line uses the <code>assign</code> statement to define the behavior of the &quot;y&quot; output. It performs a logical AND operation (<code>&amp;</code>) between the input signals &quot;a&quot; and &quot;b.&quot; The result of this AND operation is stored in the output signal &quot;y.&quot;</li></ol><p id="ffb72be7-e385-47a4-9632-3b2d56b940da" class="">In summary, this Verilog module represents a basic AND gate with two input signals &quot;a&quot; and &quot;b&quot; and one output signal &quot;y.&quot; The output signal &quot;y&quot; is the result of the logical AND operation between &quot;a&quot; and &quot;b.&quot; This module can be instantiated and used in larger Verilog designs to perform AND gate functionality.</p><p id="8ce50f38-0a41-433f-83b0-1b0f87b51d59" class="">
+</p><p id="5e55d464-8607-418a-b71d-543cb94e1305" class="block-color-gray_background">Verilog Example: Combinational Logic with <code><strong>always</strong></code> Statement</p><figure id="c375eb03-f6b8-4ccc-9b01-9696d1ddbe24"><div class="source"><a href="An%20Introduction%20to%20Hardware%20Description%20Languages%20%20bbe52dc37d824396a25368bf1f7c9c85/Verilog_Example_Combinational_Logic_with_always_Statement.mp3">https://prod-files-secure.s3.us-west-2.amazonaws.com/5ba95bf4-8f68-4e65-9bdf-3668b6a9e90a/9d93b0c5-f199-4e77-bfa9-34e7051ebca9/Verilog_Example_Combinational_Logic_with_always_Statement.mp3</a></div></figure><pre id="f07d06b3-989b-4fcf-9a74-2ebd4f8e7233" class="code code-wrap"><code>module xor_gate(
+    input a,
+    input b,
+    output y
+);
+
+    always @(*) begin
+        y = a ^ b; // XOR operation between inputs a and b, result assigned to y
+    end
+
+endmodule
+</code></pre><p id="a7befe34-1784-4723-953c-028d1ce59163" class="">In this code:</p><ul id="541a594a-8957-461b-9745-010763929d9d" class="bulleted-list"><li style="list-style-type:disc">We define a module named <code>xor_gate</code> with two input ports <code>a</code> and <code>b</code>, and one output port <code>y</code>.</li></ul><ul id="ee5a71d7-83a1-484f-87cd-97e7f7da09a4" class="bulleted-list"><li style="list-style-type:disc">Inside the module, we use an <code>always @(*)</code> block. This block indicates that the enclosed logic should be evaluated whenever any of the input signals (<code>a</code> or <code>b</code>) change.</li></ul><ul id="3e1c8604-0cd3-43c4-96cf-6a6bda27c6bb" class="bulleted-list"><li style="list-style-type:disc">Within the <code>always</code> block, we perform an XOR operation (<code>^</code>) between input signals <code>a</code> and <code>b</code>, and the result is assigned to the output signal <code>y</code>.</li></ul><p id="2c28e4bb-7441-4b13-9cfd-b15d052f4fca" class="">This module represents a simple combinational logic circuit for XOR gate functionality. When the input signals <code>a</code> or <code>b</code> change, the <code>always</code> block automatically calculates the output <code>y</code> based on the XOR operation. You can instantiate this module in your larger Verilog designs to use XOR gate functionality.</p><p id="7a1cf778-a5cb-4f41-8e01-01254145629e" class="">
+</p><figure id="b36fc30a-8f38-43f8-983e-6c015f80a905" class="image"><a href="An%20Introduction%20to%20Hardware%20Description%20Languages%20%20bbe52dc37d824396a25368bf1f7c9c85/15.png"><img style="width:1500px" src="An%20Introduction%20to%20Hardware%20Description%20Languages%20%20bbe52dc37d824396a25368bf1f7c9c85/15.png"/></a></figure><p id="2ed45174-9c27-415e-8c07-296fb171725b" class="">
+</p></div></article>
+<script>hljs.highlightAll();</script>
+</body></html>
