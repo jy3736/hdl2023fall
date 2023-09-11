@@ -1,0 +1,682 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Reading Comprehension: Introduction to Digital Systems and FPGA</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="6b477117-e6f0-406b-b7e8-344858b63b27" class="page sans"><header><img class="page-cover-image" src="Reading%20Comprehension%20Introduction%20to%20Digital%20Syst%206b477117e6f0406bb7e8344858b63b27/11.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="Reading%20Comprehension%20Introduction%20to%20Digital%20Syst%206b477117e6f0406bb7e8344858b63b27/yang01.png"/></div><h1 class="page-title">Reading Comprehension: Introduction to Digital Systems and FPGA</h1><p class="page-description"></p><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><h2 id="398b8985-1b09-4489-a614-4d723ea97170" class="block-color-teal_background">Reading Comprehension</h2><figure id="331f730c-2a87-41dd-9990-c9e204f3c395"><a  target="_blank" href="https://youtu.be/Tf17EcVrmog" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Digital Systems and FPGAs (Reading Comprehension)</div></div><div class="bookmark-href"><img src="https://www.google.com/favicon.ico" class="icon bookmark-icon"/>https://youtu.be/Tf17EcVrmog</div></div><img src="https://i.ytimg.com/vi/Tf17EcVrmog/hqdefault.jpg" class="bookmark-image"/></a></figure><div><iframe src="https://player.soundon.fm/embed/?podcast=d5f7b15f-de14-4424-aad1-07b8f3128116&episode=c1c7708b-b21e-4706-b567-6c2c8aeb1e18" id="soundon"></iframe></div><p id="4a0867e7-21ce-484a-a654-391af639f5ad" class="">
+</p><p id="6868eec4-2c54-4623-bbd2-ba44b3a39eb0" class="">Digital systems, which operate with digital signals rather than analog signals, are gaining widespread usage in various fields such as computing, telecommunications, and control systems. These systems are noted for their accuracy, reliability, and ease of programming and reconfiguration.</p><p id="b8d8281f-f9b7-4503-8b6e-743a2b025ad0" class="">Field-Programmable Gate Arrays (FPGAs) are a specific type of digital system that are becoming increasingly prevalent. They are integrated circuits that can be programmed after manufacturing to execute specific tasks, making them an appealing choice for applications requiring customization and versatility.</p><p id="2255982d-a9ad-43cf-a92c-1a3d7fbe141c" class="">One major advantage of FPGAs over traditional integrated circuits is their flexibility. Unlike traditional circuits that are designed for a particular function and cannot be altered after production, FPGAs can be reconfigured at any time, offering the possibility of adapting the circuit without having to replace it entirely.</p><p id="fa4cc7c3-a06a-46c5-aa40-e0c5ed112a25" class="">Furthermore, FPGAs offer high performance. They can be designed to perform complex tasks such as digital signal processing much faster than traditional integrated circuits. This is because the logic blocks within an FPGA can be programmed to perform specific tasks simultaneously, resulting in high performance from a relatively small number of components.</p><p id="2de5a22a-8b2d-47f5-bb2d-b87ef413c3f4" class="">Overall, digital systems are becoming crucial in a diverse array of applications, and FPGAs in particular are seeing growing popularity due to their adaptability, customization, and high performance. With the ability to be reconfigured at any time, FPGAs are a suitable solution for applications ranging from digital signal processing to image processing and networking.</p><h2 id="4ee31038-011d-4bb9-ab9b-e9ef275a0720" class="block-color-teal_background">Dialogue Practice</h2><figure id="d7e63566-87ff-4971-a008-9bac1b6b6887"><a  target="_blank" href="https://youtu.be/i0J9iJWB7xo" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Digital Systems and FPGAs (Dialogue Practice)</div></div><div class="bookmark-href"><img src="https://www.google.com/favicon.ico" class="icon bookmark-icon"/>https://youtu.be/i0J9iJWB7xo</div></div><img src="https://i.ytimg.com/vi/i0J9iJWB7xo/hqdefault.jpg" class="bookmark-image"/></a></figure><div><iframe src="https://player.soundon.fm/embed/?podcast=d5f7b15f-de14-4424-aad1-07b8f3128116&episode=e9a8b93d-c53e-4acb-aa02-c000a4ee4f3c" id="soundon"></iframe></div><p id="a9ad163b-9056-4b6d-959f-54d0e798e6dc" class="">
+</p><p id="4bcdae31-9e26-44a4-94af-f9308aac39be" class="">Henry: Hey Nency, I heard you&#x27;re interested in learning about digital systems.</p><p id="a6899a61-4ffa-4d9f-951c-b6d2514f79c5" class="">Nancy: Yes, I am Henry. I have a lot of questions about how computers work at the hardware level.</p><p id="e310c82d-e084-4d77-ad8d-4d7749efe928" class="">Henry: Well, you&#x27;re in luck! I have a lot of experience with digital systems and I&#x27;d be happy to share my knowledge with you. Have you heard of FPGAs before?</p><p id="20c78345-4a5f-4013-b7df-0e624f449430" class="">Nancy: No, I haven&#x27;t. What are they?</p><p id="55e4e9d0-c2f9-4474-9469-b01c149eee17" class="">Henry: FPGAs are Field-Programmable Gate Arrays. They&#x27;re integrated circuits that can be configured after manufacturing to perform specific tasks. They&#x27;re a key component in many digital systems, including computers.</p><p id="52e0c15d-35eb-406e-9451-b206a7d81490" class="">Nancy: That sounds really interesting. Can you give me a bit more information about how they work?</p><p id="ffa42162-6da3-4286-9ad3-3a830da408ca" class="">Henry: Of course! FPGAs contain an array of configurable logic blocks and programmable interconnects. These blocks can be programmed to perform specific functions, allowing for flexibility and customization in the design of digital systems.</p><p id="70dfa6f5-8a1d-462f-8ff9-8dbd9b5c2371" class="">Nancy: Wow, that&#x27;s really cool! I would love to learn more about FPGAs and how they&#x27;re used in [00:01:00] digital systems.</p><p id="57cb5966-4ff3-4d53-a899-234318e42561" class="">Henry: Absolutely! Let&#x27;s start by looking at the different components of a digital system and how they work together.</p><p id="16ef5759-8c89-4771-a174-407e2ee256ab" class="">Nancy: Sure! Can you give me an example of a digital system?</p><p id="f0fb61d9-15f8-4dd6-ad30-b5075f9c7e2e" class="">Henry: Sure thing! A computer is a great example of a digital system. It&#x27;s made up of several interrelated parts, including the power supply, motherboard, printed circuit boards, integrated circuits, connectors, and components.</p><p id="b9628f41-9b8f-4827-9aed-501018a785d5" class="">Nancy: That sounds really complicated. Can you break it down a bit more?</p><p id="d889ae8b-55a6-44a7-8879-b43122f5e73e" class="">Henry: Of course! Let&#x27;s start with the power supply. The power supply is responsible for providing energy to all the other components in the computer. It converts electrical power from the wall socket into the appropriate voltage and current needed by the computer.</p><p id="805e3013-05d4-4b1f-9be7-95ddc6b2c724" class="">Nancy: Okay, I understand. What about the motherboard?</p><p id="538ca622-5ec7-4330-9a0b-ff26cd81dba6" class="">Henry: The motherboard is the main circuit board in the computer and serves as the central hub for communication between the different components. It contains integrated circuits and connectors, which allow for communication [00:02:00] between the various components.</p><p id="54c1a019-8a90-47a6-addf-e04aa9674518" class="">Nancy: And what are printed circuit boards?</p><p id="e01bee8b-b6c7-47a0-9a0f-367b42e3cd41" class="">Henry: Printed circuit boards (PCBs) are thin sheets of insulating material with conductive pathways etched onto them. They are used to hold and connect the various components in the computer, including the integrated circuits.</p><p id="1c196b6c-e23f-4e1a-887d-fcb17c812877" class="">Nancy: And what about the integrated circuits?</p><p id="92558f92-b4d7-4833-8bb1-5d980d03c557" class="">Henry: Integrated circuits, commonly referred to as chips, are tiny microchips that contain multiple transistors and other components. They perform specific functions within the computer and can range from simple logic circuits to complex processors.</p><p id="165de971-7e8d-42d6-bb76-59fd99705542" class="">Nancy: That&#x27;s really interesting! And what are connectors used for?</p><p id="5419de08-3048-477b-8364-c20e17962411" class="">Henry: Connectors are used to physically connect different components of the computer to each other. They can be simple pins or more complex interfaces, such as USB or Ethernet connectors.</p><p id="aef64ecd-42e5-4eaf-a1fd-c1400f154920" class="">Nancy: And finally, what are components?</p><p id="3e904f7c-225a-41cf-a9f8-c923a8ff688d" class="">Henry: Components, such as hard drives, memory modules, and video cards, are the parts of the computer that perform specific [00:03:00] functions. They are connected to the motherboard and communicate with each other through the connectors and integrated circuits.</p><p id="4e979184-61d5-4c07-8621-d1f88bb7b125" class="">Nancy: Wow, that&#x27;s a lot of information to process! I&#x27;m so glad I asked you about digital systems and FPGAs.</p><p id="ee94c285-db79-4c3d-8d45-8e97208ef522" class="">Henry: No problem, Nency! I&#x27;m always here to help with any questions you have.</p><p id="e10824e1-9793-4d09-bd3a-7e30e0fd6953" class="">
+</p><p id="51caa3dc-241a-4e38-8114-17530532c710" class="">
+</p><figure id="b0d82b09-d84d-4e76-9a3b-a88e4bc93201" class="image"><a href="Reading%20Comprehension%20Introduction%20to%20Digital%20Syst%206b477117e6f0406bb7e8344858b63b27/5.png"><img style="width:1500px" src="Reading%20Comprehension%20Introduction%20to%20Digital%20Syst%206b477117e6f0406bb7e8344858b63b27/5.png"/></a></figure></div></article>
+<script>hljs.highlightAll();</script>
+</body></html>
