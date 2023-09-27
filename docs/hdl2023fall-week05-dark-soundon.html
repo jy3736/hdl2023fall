@@ -1,0 +1,725 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Logical Equations and Basic Gates</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="ff04893d-2dc9-48a3-bc35-6034a923cda2" class="page sans"><header><img class="page-cover-image" src="Logical%20Equations%20and%20Basic%20Gates%20ff04893d2dc948a3bc356034a923cda2/2.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="Logical%20Equations%20and%20Basic%20Gates%20ff04893d2dc948a3bc356034a923cda2/yang01.png"/></div><h1 class="page-title">Logical Equations and Basic Gates</h1><p class="page-description"></p><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><h1 id="90b573f7-94f2-40f3-b17f-205970ad9675" class="">邏輯方程式與基本閘</h1><h2 id="a01edaea-cd73-4b51-a75e-79a014b124b4" class="block-color-teal_background">This Week&#x27;s Circuit Design Adventure</h2><p id="3cbf3463-3654-4978-854c-f61e926904b9" class="">Digital circuits are composed of logic gates such as AND, OR, NOT, NAND, NOR, and XOR. Each gate has different inputs and outputs that can be combined to create complex circuits. To design digital circuits effectively, it is important to understand how these gates work.</p><p id="3cbf1465-f3b5-49c8-ba04-81f1aee74756" class="">HDLBits is an online tool that helps you learn about logic circuits. It lets you practice Verilog programming, connect wires, use basic gates, and build complex sub-circuits. This makes it easier to learn and create digital circuits based on the logical equations we discussed in class this week.</p><p id="a21246f8-bb9d-492c-a217-fa0abcb3734a" class="">You will have homework assignments from the HDLBits problem sets. You also need to download and install the Xilinx Vivado development tool on your own computers using the link in the lecture notes. Soon we will use Vivado to develop digital circuits and test them on the Zedboard experiment board. This will give you a chance to gain hands-on experience.</p><h2 id="4892f3ec-8f5e-4350-a13b-e70694c8723e" class="block-color-teal_background">References</h2><figure id="cafd4de2-3edb-412d-a658-93a1c7be634a"><a  target="_blank" href="https://hdlbits.01xz.net/wiki/Main_Page" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">HDLBits</div><div class="bookmark-description">HDLBits is a collection of small circuit design exercises for practicing digital hardware design using Verilog Hardware Description Language (HDL). Earlier problems follow a tutorial style, while later problems will increasingly challenge your circuit design skills. Each problem requires you to design a small circuit in Verilog.</div></div><div class="bookmark-href">https://hdlbits.01xz.net/wiki/Main_Page</div></div><img src="https://hdlbits.01xz.net/mw/images/0/06/Logo_v.png" class="bookmark-image"/></a></figure><h2 id="1513be3e-50ea-4042-9272-9a436330e223" class="block-color-teal_background">Course Content</h2><h3 id="6fb001f1-e1d8-4bb0-8993-d5c2a6aabffd" class="block-color-gray_background">Exercise 1: <a  target="_blank" href="https://hdlbits.01xz.net/wiki/Wire">HDLBits - Simple Wire</a></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="142b36ab-88c7-4faf-81a6-887d0d379ad6"><div style="font-size:1.5em"><img class="icon" src="Logical%20Equations%20and%20Basic%20Gates%20ff04893d2dc948a3bc356034a923cda2/yang02.png"/></div><div style="width:100%">Register and log in to <strong>HDLBits</strong> to practice <strong>Verilog</strong> coding. This problem is part of the <strong>HDLBits</strong> online problem set. Click <a  target="_blank" href="https://hdlbits.01xz.net/wiki/Wire">here</a> to access it.</div></figure><figure id="6b071a2c-0275-4401-a7c9-61eee910680d" class="image"><a href="Logical%20Equations%20and%20Basic%20Gates%20ff04893d2dc948a3bc356034a923cda2/wire.png"><img style="width:1920px" src="Logical%20Equations%20and%20Basic%20Gates%20ff04893d2dc948a3bc356034a923cda2/wire.png"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="eb24d0e0-299a-44e2-be0e-5fea11aac804"><div style="font-size:1.5em"><img class="icon" src="Logical%20Equations%20and%20Basic%20Gates%20ff04893d2dc948a3bc356034a923cda2/yang05.png"/></div><div style="width:100%">The Verilog code below does almost nothing. The module <code>lab01</code> has one input port, <code>in</code>, and one output port, <code>out</code>. The purpose is to learn how to assign a signal to another. Note that the output can drive multiple devices.</div></figure><pre id="8db67b78-e18a-42fe-9f5d-b0976edf30b4" class="code"><code>module lab01( input in, output out );
+	
+	assign out = in;
+	
+endmodule</code></pre><div id="5e8dc067-cdf8-4af5-be6d-bc033e202156" class="column-list"><div id="cb7934ee-f55b-41e2-b634-0131bc0210ac" style="width:50%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ee5d503f-fec0-4133-bf8d-faa8ddd7e3bc"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%">Once you&#x27;ve solved the problem, you should see something similar to this.</div></figure><figure id="0fdb571f-dc51-4f0a-ae1a-a12e90c9b5c4" class="image"><a href="Logical%20Equations%20and%20Basic%20Gates%20ff04893d2dc948a3bc356034a923cda2/Untitled.png"><img style="width:1689px" src="Logical%20Equations%20and%20Basic%20Gates%20ff04893d2dc948a3bc356034a923cda2/Untitled.png"/></a></figure></div><div id="1f8fdfe1-fb57-46e3-b8bc-10b107efc390" style="width:50%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b57ea816-d089-4198-8679-dd57ba004385"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%">If you don&#x27;t enter the code correctly, you might see a message like this.</div></figure><figure id="36559019-ecd9-4ad1-b2b0-2c97cb97b48d" class="image"><a href="Logical%20Equations%20and%20Basic%20Gates%20ff04893d2dc948a3bc356034a923cda2/Untitled%201.png"><img style="width:1692px" src="Logical%20Equations%20and%20Basic%20Gates%20ff04893d2dc948a3bc356034a923cda2/Untitled%201.png"/></a></figure></div></div><h3 id="33f44ef3-2431-4f5e-9da7-592f2b50e9d5" class="block-color-gray_background">Exercise 2: <a  target="_blank" href="https://hdlbits.01xz.net/wiki/Wire4">HDLBits - Four Wires</a></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="92003cc1-7f94-4b40-b6e5-dd324d291189"><div style="font-size:1.5em"><img class="icon" src="Logical%20Equations%20and%20Basic%20Gates%20ff04893d2dc948a3bc356034a923cda2/yang02.png"/></div><div style="width:100%">Create a Verilog module that takes in inputs <code>a</code>, <code>b</code>, <code>c</code> and produces outputs <code>w</code>, <code>x</code>, <code>y</code>, <code>z</code> respectively, based on the following figure.</div></figure><figure id="ce786d90-c9b1-4232-bb7a-b31f0cad3c4b" class="image"><a href="Logical%20Equations%20and%20Basic%20Gates%20ff04893d2dc948a3bc356034a923cda2/wire4.png"><img style="width:1920px" src="Logical%20Equations%20and%20Basic%20Gates%20ff04893d2dc948a3bc356034a923cda2/wire4.png"/></a></figure><div id="034001c8-673f-4deb-8ef7-08dd587f4ba6" class="column-list"><div id="d2952d42-923e-4288-ad2f-d0460749cdb0" style="width:50%" class="column"><pre id="d5ab47f5-2e8d-4f9e-85d1-bb4ede707008" class="code code-wrap"><code>module top_module( 
+    input a,b,c,
+    output w,x,y,z );
+    
+    assign w = a;
+    assign x = b;
+    assign y = b;
+    assign z = c;
+
+endmodule</code></pre></div><div id="c339a5b5-c0e8-40dc-a989-ce4d1bdeb066" style="width:50%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e43d706e-32ea-433f-95ca-d1f6312e26e3"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%">Using signal concatenation to shorten the code.</div></figure><pre id="73f577d4-96e1-490f-8732-fc58bc59a72e" class="code code-wrap"><code>module top_module( 
+    input a,b,c,
+    output w,x,y,z );
+    
+    assign {w,x,y,z} = {a,b,b,c};
+
+endmodule</code></pre></div></div><h3 id="673f8171-04f1-463b-ac70-feef3de73c6a" class="block-color-gray_background">Exercise 3: <a  target="_blank" href="https://hdlbits.01xz.net/wiki/Notgate">HDLBits - Inverter</a></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7ad50b7b-ebf0-47be-8dac-6c9b9f765bc1"><div style="font-size:1.5em"><img class="icon" src="Logical%20Equations%20and%20Basic%20Gates%20ff04893d2dc948a3bc356034a923cda2/yang02.png"/></div><div style="width:100%">An inverter is one of three primary logic gates: AND, OR, and INVERT. It is the simplest gate, constructed from two MOS transistors. When the input is <code>1</code>, the output is <code>0</code>, and vice versa.</div></figure><figure id="15604594-791c-4598-9c05-0947b47ce897" class="image"><a href="Logical%20Equations%20and%20Basic%20Gates%20ff04893d2dc948a3bc356034a923cda2/inverter.png"><img style="width:1920px" src="Logical%20Equations%20and%20Basic%20Gates%20ff04893d2dc948a3bc356034a923cda2/inverter.png"/></a></figure><pre id="8e731ff3-dfd7-4580-87c3-cec069973567" class="code code-wrap"><code>module top_module(
+	input in,
+	output out
+);
+	
+	assign out = ~in;
+	
+endmodule</code></pre><p id="58739a58-d8bf-4dae-a7ca-096eda4a9c8e" class="">
+</p><h3 id="4c32a0e1-195c-4bcf-9dd1-9f6d29c246ce" class="block-color-gray_background">Exercise 4: <a  target="_blank" href="https://hdlbits.01xz.net/wiki/Wire_decl">HDLBits - Declaring Wires</a></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="06c542ce-986a-4806-99c9-4b208f1b27e5"><div style="font-size:1.5em"><img class="icon" src="Logical%20Equations%20and%20Basic%20Gates%20ff04893d2dc948a3bc356034a923cda2/yang02.png"/></div><div style="width:100%">When the logic function of a circuit design becomes increasingly complex, it is necessary to declare internal net (wire) names in order to assign the interconnections between the various components of the circuit.</div></figure><figure id="8f5ec6e6-4faf-42c6-9e75-365757409118" class="image"><a href="Logical%20Equations%20and%20Basic%20Gates%20ff04893d2dc948a3bc356034a923cda2/declaring.png"><img style="width:1920px" src="Logical%20Equations%20and%20Basic%20Gates%20ff04893d2dc948a3bc356034a923cda2/declaring.png"/></a></figure><div id="2c032235-32ae-4c27-82df-d1fb10f2f5cb" class="column-list"><div id="d65fc0a3-99ef-496c-9fb1-3248be48977d" style="width:50%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="749943ec-987e-4d86-93ce-1e755c06f919"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%">A Verilog module named <code>top_module</code> is defined by the code. It has 4 inputs (<code>a</code>, <code>b</code>, <code>c</code>, <code>d</code>) and 2 outputs (<code>out</code> and <code>out_n</code>).<p id="2d28eac1-425b-43b0-a60b-ff97702396bb" class="">Additionally, 3 wires (<code>x1</code>, <code>x2</code>, <code>y</code>) are declared to store temporary results.</p><p id="363ba19e-c78f-4c79-84e6-b36642ae80d9" class="">The first <code>assign</code> statement sets <code>x1</code> to the bitwise AND of <code>a</code> and <code>b</code>, the second <code>assign</code> statement sets <code>x2</code> to the bitwise AND of <code>c</code> and <code>d</code>, and the third <code>assign</code> statement sets <code>y</code> to the bitwise OR of <code>x1</code> and <code>x2</code>.</p><p id="8cb36a1c-bb82-4a5f-ac26-be39ceb790aa" class="">Finally, the last two <code>assign</code> statements set <code>out</code> and <code>out_n</code> to the value of <code>y</code> and the bitwise NOT of <code>y</code> respectively.</p></div></figure><p id="cb36fea5-1719-4c9c-be88-a4c35e57da13" class="">
+</p></div><div id="8878c34e-f4e9-44d8-b100-dc22fbbbc8a4" style="width:50%" class="column"><pre id="7f0cd27f-3abf-4f1b-9248-f8bdb38b5f77" class="code code-wrap"><code>module top_module(
+    input a,
+    input b,
+    input c,
+    input d,
+    output out,
+    output out_n   ); 
+    
+    wire x1,x2,y; 
+    
+    assign x1 = a &amp; b;
+    assign x2 = c &amp; d;
+    assign y = x1 | x2;
+    assign out = y;
+    assign out_n = ~ y;
+
+endmodule</code></pre></div></div><h2 id="64f790d8-b6f5-4d3a-a2c9-18ba01871c8a" class="block-color-teal_background">Assignments</h2><h3 id="b58d2b98-b77d-4428-9594-b358c15f1a13" class="block-color-gray_background">Assignment 1: Xilinx Vivado Installation Guide (Optional)</h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="8b4bb5d8-5ce9-45b0-82a4-2f59dc9506ed"><div style="font-size:1.5em"><img class="icon" src="Logical%20Equations%20and%20Basic%20Gates%20ff04893d2dc948a3bc356034a923cda2/yang-g-tr.png"/></div><div style="width:100%">Download and install <strong>Xilinx Vivado</strong> on your PC. To ensure the installation is successful, try the <strong>Course Practice problems</strong>.</div></figure><figure id="65f4d5b4-dec5-4609-bf6f-d33eb7ac7ba9"><a  target="_blank" href="https://www.xilinx.com/support/download.html" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Downloads</div><div class="bookmark-description">Vivado, Vitis, Vitis Embedded Platform, PetaLinux, Device models</div></div><div class="bookmark-href"><img src="https://www.xilinx.com/content/dam/code/images/favicon/favicon.ico" class="icon bookmark-icon"/>https://www.xilinx.com/support/download.html</div></div><img src="https://www.xilinx.com/content/dam/xilinx/images/ogimage.jpg" class="bookmark-image"/></a></figure><p id="8d711aea-2b52-4f8c-934b-69f2e59370e0" class="">
+</p><h3 id="d51f0e06-52d8-4765-85e3-0b3cc3a10830" class="block-color-gray_background">Assignment 2: Take on the challenge of the HDLBits problem sets this week.</h3><ul id="0ff5a789-dd49-40ca-987e-4afe161a3a6f" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://hdlbits.01xz.net/wiki/7458">HDLBits - 7458 chip</a></li></ul><ul id="18a1d760-668d-4640-82ba-8042320bc2cb" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://hdlbits.01xz.net/wiki/Vector0">HDLBits - Vectors</a></li></ul><ul id="79e5d47d-02c0-43ce-a72a-af24780233ee" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://hdlbits.01xz.net/wiki/Vector1">HDLBits - Vectors in more detail</a></li></ul><ul id="54c1c7b5-6b7e-4fee-b24c-e5d5b0c88524" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://hdlbits.01xz.net/wiki/Vector2">HDLBits - Vector part select</a></li></ul><ul id="2c5c1082-bd77-4278-88ec-09f54bf54eff" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://hdlbits.01xz.net/wiki/Vectorgates">HDLBits - Bitwise operators</a></li></ul><ul id="753722d3-4432-4918-969e-79ef72a951b4" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://hdlbits.01xz.net/wiki/Gates4">HDLBits - Four-input gates</a></li></ul><ul id="b373e131-f58f-426f-8518-bbf0d98d3a15" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://hdlbits.01xz.net/wiki/Vector3">HDLBits - Vector concatenation operator</a></li></ul><p id="a6bef6fe-10c0-4d60-b84d-978d3ba5e00f" class="">
+</p><p id="9b437671-d3bf-45ef-8df1-14829a4bea81" class="">
+</p><figure id="32bdc2d4-39a9-494c-a40a-52baf6cb813b" class="image"><a href="Logical%20Equations%20and%20Basic%20Gates%20ff04893d2dc948a3bc356034a923cda2/18.png"><img style="width:1500px" src="Logical%20Equations%20and%20Basic%20Gates%20ff04893d2dc948a3bc356034a923cda2/18.png"/></a></figure></div></article>
+<script>hljs.highlightAll();</script>
+</body></html>

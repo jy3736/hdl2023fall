@@ -1,0 +1,715 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Combinational Logic Circuits - Logic Operators and Bit Verctios</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="16d30f32-3ecd-4217-a1d2-8ddfe0ad5172" class="page sans"><header><img class="page-cover-image" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/9.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/yang01.png"/></div><h1 class="page-title">Combinational Logic Circuits - Logic Operators and Bit Verctios</h1><p class="page-description"></p><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><h1 id="b2677809-f80b-4f05-a788-f1c54c5d8fc8" class="">組合邏輯電路 - 邏輯運算子與位元向量</h1><p id="6b63b2eb-05ad-413f-9395-1c9c99eea63a" class="">Combinational logic circuits use a combination of basic logic gates to process input signals and generate an output. The output is dependent on the current values of the input signals, and it changes immediately when the input values are altered. This concept is fundamental to digital electronics, and the use of Hardware Description Language (HDL) for development has significantly contributed to modern digital system design, making the process more efficient and reliable. HDL enables designers to describe digital circuits using a textual or graphical representation, and to simulate and test the circuits before implementation. Combinational logic circuits are used in a variety of digital devices, such as calculators, computers, and digital signal processing systems, as well as in more complex digital systems, such as microprocessors and microcontrollers.</p><h2 id="851afacb-5dbb-41e5-a780-b0f7409f2c17" class="block-color-teal_background">This Week&#x27;s Circuit Design Adventure</h2><p id="323aef85-8eee-4755-806f-fccb9ea451e0" class="">This week in class, we will take a closer look at a basic form of digital logic known as combinational logic circuits. We will review the AND, OR, INV, NAND and NOR logic gates, exploring why they exist and how to combine them. We will learn how to use Verilog to program the desired combinational logic circuits. We will use a Multiplexer (MUX) gate as an example to help us understand how these circuits work and how they can be used to choose one input out of many. We will also look at 1-bit Full Adders, which are a more complex type of combinational logic circuit, and how they can be used to do math. By the end of the class, you should feel comfortable with the basics of logic gates, HDL, combinational logic circuits, MUX gates and Full Adders.</p><h2 id="51e3f2c2-d211-4d01-8dc9-5a5732807f42" class="block-color-teal_background">References</h2><figure id="e75890a6-5704-495b-b513-f5e5c6961dbe"><a  target="_blank" href="https://hdlbits.01xz.net/wiki/Main_Page" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">HDLBits</div><div class="bookmark-description">HDLBits is a collection of small circuit design exercises for practicing digital hardware design using Verilog Hardware Description Language (HDL). Earlier problems follow a tutorial style, while later problems will increasingly challenge your circuit design skills. Each problem requires you to design a small circuit in Verilog.</div></div><div class="bookmark-href">https://hdlbits.01xz.net/wiki/Main_Page</div></div><img src="https://hdlbits.01xz.net/mw/images/0/06/Logo_v.png" class="bookmark-image"/></a></figure><figure class="callout" style="white-space:pre-wrap;display:flex" id="80ceb6e9-1ab2-4e87-9126-5241169e7ebb"><div style="font-size:1.5em"><span class="icon">💻</span></div><div style="width:100%"><a  target="_blank" href="https://nandland.com/bitwise-operators/">Verilog Example Code of Bitwise Operators (nandland.com)</a><table id="25cef74b-efde-4a14-92d7-aa87b54db521" class="simple-table"><tbody><tr id="52765fa9-b0ab-4a20-a237-97e032c7df0e"><td id="^tpr" class=""><strong>Operator</strong></td><td id="Bi&lt;o" class=""><strong>Symbol</strong></td><td id="N^N&gt;" class="" style="width:317px"><strong>Description</strong></td></tr><tr id="1f1d730e-faa9-4a68-8796-7637a529bd55"><td id="^tpr" class="">Bitwise AND</td><td id="Bi&lt;o" class="">&amp;</td><td id="N^N&gt;" class="" style="width:317px">Performs logical AND operation on each pair of bits. A &amp; B is 1 only if both A and B are 1.</td></tr><tr id="cb272325-8180-4362-aa0d-99bbe9ec32b7"><td id="^tpr" class="">Bitwise OR</td><td id="Bi&lt;o" class="">|</td><td id="N^N&gt;" class="" style="width:317px">Performs logical OR operation on each pair of bits. A | B is 1 if either A or B is 1.</td></tr><tr id="6c7a8325-345b-43c9-98ec-7217b19880ac"><td id="^tpr" class="">Bitwise XOR</td><td id="Bi&lt;o" class="">^</td><td id="N^N&gt;" class="" style="width:317px">Performs logical XOR operation on each pair of bits. A ^ B is 1 if A and B are different.</td></tr><tr id="0b2e574f-77a7-475f-b07f-9a213fdc10b9"><td id="^tpr" class="">Bitwise XNOR</td><td id="Bi&lt;o" class="">^~ or ~^</td><td id="N^N&gt;" class="" style="width:317px">Performs logical XNOR operation on each pair of bits. A ^~ B is 1 if A and B are same.</td></tr><tr id="50c81168-1bbc-4187-92ce-e480362231c4"><td id="^tpr" class="">Bitwise NOT</td><td id="Bi&lt;o" class="">~</td><td id="N^N&gt;" class="" style="width:317px">Performs logical NOT operation on each bit. ~A is 1 if A is 0 and vice versa.</td></tr></tbody></table></div></figure><figure class="callout" style="white-space:pre-wrap;display:flex" id="eca61f9f-b84d-4f34-b16b-53a059ad126b"><div style="font-size:1.5em"><span class="icon">💻</span></div><div style="width:100%"><a  target="_blank" href="https://www.chipverify.com/verilog/verilog-operators">Verilog Operators (chipverify.com)</a><table id="f40ec12a-3321-41bf-86c1-48aee21aa6e4" class="simple-table"><tbody><tr id="33c3b532-b574-4132-b415-c94f56c172fc"><td id="lRoG" class=""><strong>Operator</strong></td><td id="garl" class=""><strong>Symbol</strong></td><td id="T~Wd" class="" style="width:317px"><strong>Description</strong></td></tr><tr id="6658c0f9-0f62-47ba-a30b-1969eb680be2"><td id="lRoG" class="">Logical AND</td><td id="garl" class="">&amp;&amp;</td><td id="T~Wd" class="" style="width:317px">Performs logical AND operation on two boolean values. A &amp;&amp; B is 1 only if both A and B are 1.</td></tr><tr id="b9edcdff-d272-4250-9f20-12e1317b8124"><td id="lRoG" class="">Logical OR</td><td id="garl" class="">||</td><td id="T~Wd" class="" style="width:317px">Performs logical OR operation on two boolean values. A || B is 1 if either A or B is 1.</td></tr><tr id="5df0e98f-ecc3-418f-b314-b8419f50e3ee"><td id="lRoG" class="">Logical NOT</td><td id="garl" class="">!</td><td id="T~Wd" class="" style="width:317px">Performs logical NOT operation on a boolean value. !A is 1 if A is 0 and vice versa.</td></tr></tbody></table></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b3efc660-6030-4852-872f-474754d15302"><div style="font-size:1.5em"><span class="icon">💻</span></div><div style="width:100%"><a  target="_blank" href="https://www.chipverify.com/verilog/verilog-concatenation">Verilog Concatenation (chipverify.com)</a><p id="ae441b48-2e14-4e59-8859-20ed06bfa5ba" class="">Here are five examples of Verilog bit vectors concatenation: </p><pre id="1c5167a5-0b1a-49da-9fb4-e9803ca9c2c3" class="code code-wrap"><code>// Example 1: Concatenate two 4-bit vectors into an 8-bit vector
+wire [3:0] a;
+wire [3:0] b;
+wire [7:0] c;
+assign c = {a,b};
+
+// Example 2: Concatenate a constant and a variable into a 5-bit vector
+reg [3:0] x;
+reg [4:0] y;
+assign y = {1&#x27;b1,x};
+
+// Example 3: Concatenate an expression and a wire into a 6-bit vector
+wire [2:0] p;
+wire [2:0] q;
+wire [5:0] r;
+assign r = {(p+q),q};
+
+// Example 4: Concatenate three single bits into a 3-bit vector
+input s;
+input t;
+input u;
+output [2:0] v;
+assign v = {s,t,u};
+
+// Example 5: Concatenate a replication of a bit into a 4-bit vector
+reg w;
+reg [3:0] z;
+assign z = {4{w}};</code></pre></div></figure><h2 id="8b9d04e1-0ec4-4529-8a32-454ce1a74141" class="block-color-yellow_background">Course Content</h2><h3 id="b4e22305-686d-4b6b-9132-a8a9789b7bca" class="block-color-gray_background">Exercise 1: <a  target="_blank" href="https://hdlbits.01xz.net/wiki/Vector0">Vector0 - HDLBits (01xz.net)</a></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="49271588-7b51-4160-b29c-ab0637c1e6be"><div style="font-size:1.5em"><img class="icon" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/yang02.png"/></div><div style="width:100%">Design a circuit that takes a 3-bit input vector (vec[2:0]) and produces the same vector as output (outv[2:0]). Additionally, the circuit should output each bit of the input vector as a separate 1-bit output. Each output should be connected to the corresponding bit position of the input vector (o0 to bit position 0, o1 to bit position 1, etc.).</div></figure><div id="ea59b83a-13d5-4781-b127-73fda77c2ee7" class="column-list"><div id="321a5d52-9388-407a-aef8-bc3fcfb7b0ae" style="width:37.5%" class="column"><figure id="0ca12228-9c29-49f1-8836-5663f2a92675" class="image"><a href="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled.png"><img style="width:1073px" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled.png"/></a></figure></div><div id="c91f005f-d837-49d2-9082-0afb5af5d921" style="width:62.5%" class="column"><figure id="309af446-3820-4647-8b3a-d6b611ea73f8" class="image"><a href="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/vector0.png"><img style="width:1920px" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/vector0.png"/></a></figure></div></div><figure id="725093c4-affd-4354-bd90-7780a5b47932" class="image"><a href="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%201.png"><img style="width:480px" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%201.png"/></a></figure><figure id="f3b54132-ee6e-4b33-b278-94027478e033" class="image"><a href="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%202.png"><img style="width:480px" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%202.png"/></a></figure><p id="b1e01303-f8ef-45b4-8b46-e16560d0f00f" class="">
+</p><h3 id="592059c7-ce62-4228-8d30-0eda9b0ad98c" class="block-color-gray_background">Exercise 2: <a  target="_blank" href="https://hdlbits.01xz.net/wiki/Vector1">Vector1 - HDLBits (01xz.net)</a></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="97ca5916-1393-4c90-bfe5-4f13705fa68d"><div style="font-size:1.5em"><img class="icon" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/yang02.png"/></div><div style="width:100%">Construct a combinational circuit that divides an input half-word (16 bits, <code>[15:0]</code>) into lower <code>[7:0]</code> and upper <code>[15:8]</code> bytes.</div></figure><figure id="b47173fc-3bd0-41b8-95c2-4f0d62ccad4d" class="image"><a href="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%203.png"><img style="width:2210px" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%203.png"/></a></figure><figure id="175e0316-b4bc-4c96-83a6-5b921fbd20d5" class="image"><a href="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%204.png"><img style="width:3198px" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%204.png"/></a></figure><p id="02f530d8-ceec-47bb-b830-51bbba0a3224" class="">
+</p><h3 id="51fef6ff-b1df-468a-b6e9-33770625b8df" class="block-color-gray_background">Exercise 3: <a  target="_blank" href="https://hdlbits.01xz.net/wiki/Vector2">Vector2 - HDLBits (01xz.net)</a></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="eb7af571-3aba-4fc0-8a2a-75fab0486435"><div style="font-size:1.5em"><img class="icon" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/yang02.png"/></div><div style="width:100%">A 32-bit vector can be viewed as having 4 bytes (bits [31:24], [23:16], etc.). Build a circuit to reverse the <strong>byte</strong> ordering of the 4-byte word.<pre id="f613cf8e-e014-4ced-ad4a-4f58ce1bca59" class="code code-wrap"><code>Byte3 Byte2 Byte1 Byte0  =&gt; Byte0 Byte1 Byte2 Byte3</code></pre></div></figure><figure id="95e5163c-bd07-4eb9-9ae7-6bbfc20488f4" class="image"><a href="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%205.png"><img style="width:480px" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%205.png"/></a></figure><figure id="5aa9e372-3e5a-4525-812b-46fe32dc7b03" class="image"><a href="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%206.png"><img style="width:3057px" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%206.png"/></a></figure><p id="f47c137b-ceed-4ecb-9240-158535abe0bc" class="">
+</p><h3 id="938e8172-f4aa-44a2-813d-83bf66804741" class="block-color-gray_background">Exercise 4: <a  target="_blank" href="https://hdlbits.01xz.net/wiki/Vectorgates">Vectorgates - HDLBits (01xz.net)</a></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="81557003-2f9c-422a-84df-c7d95b976954"><div style="font-size:1.5em"><img class="icon" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/yang02.png"/></div><div style="width:100%">Design a circuit with two 3-bit inputs that performs three operations: bitwise-OR, logical-OR, and NOT. The bitwise-OR output is the result of applying the OR operator to each pair of bits in the same position. The logical-OR output is 1 if any bit in either input is 1. The NOT output is the complement of both inputs. The NOT output has six bits: the upper three bits are the complement of input <code>b</code> and the lower three bits are the complement of input <code>a</code>.</div></figure><figure id="790c0a34-4965-4763-ba80-4e8e4cdb24e6" class="image"><a href="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/vectorgates.png"><img style="width:1920px" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/vectorgates.png"/></a></figure><figure id="9611e483-a3bb-4dae-9edf-7ba126859109" class="image"><a href="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%207.png"><img style="width:2478px" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%207.png"/></a></figure><figure id="3ca1a060-d609-4801-b026-c7365bcd7a50" class="image"><a href="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%208.png"><img style="width:3689px" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%208.png"/></a></figure><p id="7227283e-970a-4932-9a22-f60c4563bd87" class="">
+</p><h3 id="be5cd3c5-08ea-4cb2-81aa-fe8335d71d00" class="block-color-gray_background">Exercise 5: <a  target="_blank" href="https://hdlbits.01xz.net/wiki/Gates4">Gates4 - HDLBits (01xz.net)</a></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e6390f89-6634-444c-9bc7-a621d20e9a06"><div style="font-size:1.5em"><img class="icon" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/yang02.png"/></div><div style="width:100%">Design a combinational logic circuit that has four input bits, <code>in[3:0]</code>.<p id="2b7c0146-a4c6-4fde-b1e5-93ec8b150328" class="">The circuit should have three output bits:</p><p id="96c5540a-481e-4c73-b671-6467c3a6684e" class=""><code>out_and</code>: the result of applying a 4-input AND operation to the input bits. </p><p id="2a085dc6-41a2-4fef-8b73-b3229c9062f7" class=""><code>out_or</code>: the result of applying a 4-input OR operation to the input bits. </p><p id="b8e48c59-a43e-42e7-b1bb-a00165fd2ab5" class=""><code>out_xor</code>: the result of applying a 4-input XOR operation to the input bits.</p><p id="dc024879-69ad-477d-9656-4f077db9388e" class="">Performing reduction logic operations using the symbols &amp;, |, and ^ with the bit vectors is commonly known as reduction AND, OR, and XOR.</p></div></figure><figure id="91a3dbde-29fb-4ead-8db0-9d55ca3693bf" class="image"><a href="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%209.png"><img style="width:480px" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%209.png"/></a></figure><figure id="63cddaa5-217f-483d-b6d5-59d21e457027" class="image"><a href="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%2010.png"><img style="width:2816px" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%2010.png"/></a></figure><p id="35320eb3-9fdf-402b-85e0-010784ae943b" class="">
+</p><h3 id="f4e63085-c58d-487c-8f95-6dc83d9f380b" class="block-color-gray_background">Exercise 6: <a  target="_blank" href="https://hdlbits.01xz.net/wiki/Vector3">Vector3 - HDLBits (01xz.net)</a></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c84422c2-3604-482b-9dde-5b8710057956"><div style="font-size:1.5em"><img class="icon" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/yang02.png"/></div><div style="width:100%">Write a Verilog module that takes six 5-bit inputs (a, b, c, d, e, f) and produces four 8-bit outputs (w, x, y, z). The outputs should be formed by concatenating the inputs and appending two 1 bits at the end. 
+<strong>For example:</strong><p id="d297dc50-dbca-4e3b-8b05-d7d14f7c1ffc" class="">a = 5’b00001 b = 5’b00010 c = 5’b00100 d = 5’b01000 e = 5’b10000 f = 5’b11111</p><p id="86004721-3670-4a4d-b1ef-1a08a8af36d8" class="">w = 8’b00001000 x = 8’b10000100 y = 8’b01000111 z = 8’b11110011</p><figure id="cfc4e9a8-a330-49dd-91c9-303185641c57" class="image"><a href="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Vector3.png"><img style="width:432px" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Vector3.png"/></a></figure></div></figure><figure id="a00fdaf4-eccf-4ed3-88a4-7e05782f1eb9" class="image"><a href="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%2011.png"><img style="width:480px" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%2011.png"/></a></figure><figure id="496ee74e-713e-45bc-a2ec-ec08b238e433" class="image"><a href="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%2012.png"><img style="width:2341px" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%2012.png"/></a></figure><p id="4f2f36ef-3a07-421d-bf87-c1a6b8984b9c" class="">
+</p><h3 id="87e7ca57-5a31-4665-84cd-c28810ce8089" class="block-color-gray_background">Exercise 7: <a  target="_blank" href="https://hdlbits.01xz.net/wiki/Vectorr">Vectorr - HDLBits (01xz.net)</a></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="6019ec57-4bac-4c20-b329-801b95bfc9b8"><div style="font-size:1.5em"><img class="icon" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/yang02.png"/></div><div style="width:100%">Swap the positions of the bits in an 8-bit input vector [7:0] such that the most significant bit becomes the least significant bit and vice versa.</div></figure><figure id="0e56f2a8-15f0-4a2f-9cd1-13fd6df03612" class="image"><a href="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%2013.png"><img style="width:2116px" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%2013.png"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="5c760932-c41c-41f4-b949-b35a1dcdbc86"><div style="font-size:1.5em"><img class="icon" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/yang02%201.png"/></div><div style="width:100%">An alternative way to solve this problem<figure id="ab117256-45f2-44ac-a56d-0135e7022595" class="image"><a href="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%2014.png"><img style="width:2280px" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%2014.png"/></a></figure></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="10c79110-8744-4e22-9270-b24d8ee243d7"><div style="font-size:1.5em"><img class="icon" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/yang02%201.png"/></div><div style="width:100%">A different approach to this problem<figure id="57f47783-b054-4a81-97b9-6543f102cf80" class="image"><a href="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%2015.png"><img style="width:1618px" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%2015.png"/></a></figure></div></figure><figure id="07083721-76b2-4e79-a06f-7bbf5a943ba9" class="image"><a href="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%2016.png"><img style="width:1575px" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/Untitled%2016.png"/></a></figure><h2 id="110858d9-9e51-42da-bf38-80f4bbfbd436" class="block-color-teal_background">Assignments</h2><h3 id="ced085d4-5955-41d6-842b-3ba0c712c28e" class="block-color-gray_background">Assignment 1: Take on the challenge of the HDLBits problem sets this week.</h3><p id="060c7ae8-ebfa-4848-af7c-7d399ceef06f" class="">HDLBits <a  target="_blank" href="https://hdlbits.01xz.net/wiki/Vector4">Replication operator</a></p><p id="362efca2-6dcf-4003-a858-c12cca1710e3" class="">HDLBits <a  target="_blank" href="https://hdlbits.01xz.net/wiki/Vector5">More replication</a></p><p id="d56c8546-8170-4db0-b3a5-0847aef02fc8" class="">
+</p><p id="d3f25d73-fac5-4658-ba79-9ba7518d8fc3" class="">
+</p><figure id="0a0bc13c-0a9e-4d40-9a71-7b7cc1e0634e" class="image"><a href="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/16.png"><img style="width:1500px" src="Combinational%20Logic%20Circuits%20-%20Logic%20Operators%20and%2016d30f323ecd4217a1d28ddfe0ad5172/16.png"/></a></figure><p id="b824f53e-489b-41a5-b5ca-e185869a40b1" class="">
+</p></div></article>
+<script>hljs.highlightAll();</script>
+</body></html>
