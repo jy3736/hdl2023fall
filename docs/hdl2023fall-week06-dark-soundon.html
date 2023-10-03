@@ -1,0 +1,687 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Combinational Logic Circuits - MUX and Arithmetic Circuits </title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="2986b62b-1afb-4928-9271-f3cb7e951651" class="page sans"><header><img class="page-cover-image" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/9.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/yang01.png"/></div><h1 class="page-title">Combinational Logic Circuits - MUX and Arithmetic Circuits </h1><p class="page-description"></p><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><h1 id="3521222b-9a1a-429d-9939-924b0192b98b" class="">組合邏輯電路 - 多工器與運算電路 </h1><div><iframe src="https://player.soundon.fm/embed/?podcast=d5f7b15f-de14-4424-aad1-07b8f3128116&episode=96f04ee4-5447-4356-91c6-2f524e43d1e9" id="soundon"></iframe></div><p id="8be43beb-62d7-4085-b6d3-ca9bc61c2291" class="">A combinational logic circuit is a digital circuit that uses logic gates to manipulate input signals and generate output signals. The output depends only on the current input, as the circuit has no memory or feedback. Combinational logic circuits can perform various functions, such as data transmission, data encoding, data selection, arithmetic operations and calculations. Two examples of combinational logic circuits are multiplexers and arithmetic circuits. A multiplexer selects one of several input signals and forwards it to a single output line. An arithmetic circuit performs arithmetic operations on binary numbers. Both multiplexers and arithmetic circuits can be built using AND, OR and NOT gates.</p><h2 id="dded9746-6d56-4586-87e1-5eefbf3f2cdb" class="block-color-teal_background">This Week&#x27;s Circuit Design Adventure</h2><div><iframe src="https://player.soundon.fm/embed/?podcast=d5f7b15f-de14-4424-aad1-07b8f3128116&episode=3082c5e3-6828-45c7-93f2-07b42252fbe8" id="soundon"></iframe></div><p id="e13a0270-01aa-4f2b-b1c1-375376e5dbc7" class="">This week, you will learn how to make and use some simple logic circuits that can do things like choose between different inputs or add numbers. These circuits are called combinational logic circuits and they include multiplexers (MUX) and arithmetic circuits. You will see how you can build these circuits with logic gates, which are basic devices that can perform logical operations like AND, OR and NOT. You will also learn how to design and test these circuits using truth tables, Boolean algebra and HDLBits. You will practice with some examples of MUX and arithmetic circuits in class, such as a 4-to-1 MUX that can select one of four inputs, a half-adder that can add two bits, a full-adder that can add three bits and a 4-bit adder that can add four-bit numbers. After class, you will do more problems on HDLBits to improve your skills with combinational logic circuits.</p><h2 id="8d4f90e5-3543-46cd-be52-a0eab1ef4990" class="block-color-teal_background">References</h2><figure id="8a2f5d5a-a010-4575-86ea-3e9fffd57bc6"><a  target="_blank" href="https://hdlbits.01xz.net/wiki/Main_Page" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">HDLBits</div><div class="bookmark-description">HDLBits is a collection of small circuit design exercises for practicing digital hardware design using Verilog Hardware Description Language (HDL). Earlier problems follow a tutorial style, while later problems will increasingly challenge your circuit design skills. Each problem requires you to design a small circuit in Verilog.</div></div><div class="bookmark-href">https://hdlbits.01xz.net/wiki/Main_Page</div></div><img src="https://hdlbits.01xz.net/mw/images/0/06/Logo_v.png" class="bookmark-image"/></a></figure><h2 id="c7090987-1a5a-48ee-84b4-92ca0d0c9fd7" class="block-color-teal_background">Course Content</h2><h3 id="f96f27b9-ada8-465c-baec-059f3cfa2925" class="block-color-gray_background">Exercise 1: <a  target="_blank" href="https://hdlbits.01xz.net/wiki/Truthtable1">Truthtable1 - HDLBits (01xz.net)</a></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="fd48321f-9059-473d-b0a3-88d443eea503"><div style="font-size:1.5em"><img class="icon" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/yang02.png"/></div><div style="width:100%">To construct the circuit shown below with only standard logic gates, we need to use a simple method called sum-of-products. This method means that we first use AND gates to combine the inputs according to each row of the truth table. Then we use OR gates to select only the rows that have a &#x27;1&#x27; output. This way, we can create any logic function from a truth table using sum-of-products.</div></figure><figure id="e584d5b1-830b-4f77-bd8f-2c87eabd4c57" class="image"><a href="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Truthtable1.png"><img style="width:1920px" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Truthtable1.png"/></a></figure><h3 id="bd28ebbf-94c8-4e38-8960-4d7fe9af8e88" class="">Example Solution</h3><figure id="6e6b42e2-d4f6-4371-a5d7-326c49054322" class="image"><a href="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled.png"><img style="width:2037px" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled.png"/></a></figure><h3 id="d5e2a50f-dc64-497b-8c4a-adfa7d995be5" class="">Verilog Simulation Waveform</h3><figure id="21f39020-5856-4ab8-bf00-dc873508cf2f" class="image"><a href="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%201.png"><img style="width:432px" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%201.png"/></a></figure><h3 id="dca2b1ca-3963-4521-a986-47e6c79d0ccb" class="block-color-gray_background">Exercise 2:  <a  target="_blank" href="https://hdlbits.01xz.net/wiki/Mt2015_eq2">Comparator - HDLBits (01xz.net)</a></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="be3cfc73-2fa0-4725-9ad2-fc42c1545352"><div style="font-size:1.5em"><img class="icon" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/yang02.png"/></div><div style="width:100%">Design a logic circuit with two sets of two-bit inputs, A[1:0] and B[1:0], that generates an output, z. The output, z, should be set to 1 if A and B have the same value; otherwise, z should be set to 0.</div></figure><h3 id="3fddbef1-0150-4bc2-b514-a474b24698d4" class="">Example Solution</h3><figure id="2d4f9cb4-7a66-486e-a803-2c8aea34801c" class="image"><a href="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%202.png"><img style="width:528px" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%202.png"/></a></figure><p id="67b9edbd-8ef6-4252-95cf-777b06c0e4f6" class="">
+</p><h3 id="b7be90ec-ec3d-4c65-a2a3-07f764ddc28f" class="block-color-gray_background">Exercise 3:  <a  target="_blank" href="https://hdlbits.01xz.net/wiki/Mux2to1">Mux2to1 - HDLBits (01xz.net)</a></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="27b3db87-74f6-42f7-b36b-a1698d48598e"><div style="font-size:1.5em"><img class="icon" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/yang02.png"/></div><div style="width:100%">Create a 2-to-1 multiplexer that is one bit wide. When the select input (sel) is set to 0, the output of the multiplexer should be the input a. When the select input is set to 1, the output of the multiplexer should be the input b.</div></figure><h3 id="2d4f6bfb-a015-4fb4-a8e3-3442eeacb7d1" class="">Example Solution</h3><figure id="2681e874-f3c8-41d3-bfa0-e5100e7b4ea6" class="image"><a href="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%203.png"><img style="width:1711px" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%203.png"/></a></figure><h3 id="25e475a2-57e3-4d66-8c29-1a9b365a4459" class="">Verilog Simulation Waveform</h3><figure id="33cfeb16-f292-4fa5-a49e-a3dbf6ce8e00" class="image"><a href="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%204.png"><img style="width:1499px" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%204.png"/></a></figure><h3 id="bef302c0-1ce1-43e7-ac8c-040f96239232" class="block-color-gray_background">Exercise 4:  <a  target="_blank" href="https://hdlbits.01xz.net/wiki/Mux2to1v">Mux2to1v - HDLBits (01xz.net)</a></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="067094f9-6942-4ada-9fe6-d62b3fac4a55"><div style="font-size:1.5em"><img class="icon" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/yang02.png"/></div><div style="width:100%">Create a 2-to-1 multiplexer that is 100 bits wide. When the selection input (sel) is 0, select input a. When the selection input is 1, select input b.</div></figure><h3 id="a27eddbd-d432-4e71-a80b-8fa6878eaa26" class="">Example Solution</h3><figure id="949e57cb-c9ff-4057-afa4-4433cfb94c5a" class="image"><a href="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%205.png"><img style="width:528px" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%205.png"/></a></figure><h3 id="6b31bc2a-2a86-4037-85d7-f93bbcb1cb9c" class="">Verilog Simulation Waveform</h3><figure id="891b8d78-6197-4e1f-a96c-bacfdc1f5ea1" class="image"><a href="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%206.png"><img style="width:3037px" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%206.png"/></a></figure><h3 id="494ec13d-4898-46b6-8542-154f59f62743" class="block-color-gray_background">Exercise 5:  <a  target="_blank" href="https://hdlbits.01xz.net/wiki/Mux9to1v">Mux9to1v - HDLBits (01xz.net)</a></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="862f8cf4-5f06-40f0-b182-9ec33dea37ca"><div style="font-size:1.5em"><img class="icon" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/yang02.png"/></div><div style="width:100%">Design a multiplexer that has a width of 16 bits and selects between 9 input sources, labeled as a to i. The selection is controlled by a 4-bit input called sel, where sel=0 selects input a, sel=1 selects input b, and so on up to sel=8 selects input i. For the remaining sel values, which are sel=9 to 15, set all output bits to &#x27;1&#x27;, indicating that none of the inputs are selected.</div></figure><h3 id="bf7d0ca0-7ae6-43a0-810b-374162f12169" class="">Example Solution</h3><figure id="13cc1b0b-bdf0-40fc-959e-072e1d881f94" class="image"><a href="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%207.png"><img style="width:480px" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%207.png"/></a></figure><h3 id="d7bae277-0a84-4ebf-a3a9-7fcd69121e45" class="">HDLBbits Model Solution</h3><figure id="c7dc21be-775e-42f4-831a-6acb0adf0de6" class="image"><a href="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%208.png"><img style="width:1945px" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%208.png"/></a></figure><h3 id="9c3f4a91-b200-43cd-8180-51abdcda91a5" class="">Verilog Simulation Waveform</h3><figure id="cabf73cd-51c6-42f0-948a-66528d332eb4" class="image"><a href="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%209.png"><img style="width:528px" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%209.png"/></a></figure><h3 id="bf5fdfe1-7d6a-4e35-9bba-ab7b68a6e7c1" class="block-color-gray_background">Exercise 6:  <a  target="_blank" href="https://hdlbits.01xz.net/wiki/Mux256to1">Mux256to1 - HDLBits (01xz.net)</a></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="38de34b9-c5c1-44cb-9d30-1289284a8cbc"><div style="font-size:1.5em"><img class="icon" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/yang02.png"/></div><div style="width:100%">Create a multiplexer that can select one bit from 256 possible inputs. All the 256 inputs are combined into a single 256-bit input vector. When sel=0, the first input bit is selected; when sel=1, the second input bit is selected, and so on until sel=255 selects the last input bit.</div></figure><h3 id="64e7459e-678a-428e-b095-e2ee40e379df" class="">Example Solution</h3><figure id="ca3637a0-c34c-473d-80a2-9bc92f542a54" class="image"><a href="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%2010.png"><img style="width:336px" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%2010.png"/></a></figure><h3 id="be2971c4-32bf-4594-a52e-592b48f892a8" class="block-color-gray_background">Exercise 7:  <a  target="_blank" href="https://hdlbits.01xz.net/wiki/Mux256to1v">Mux256to1v - HDLBits (01xz.net)</a></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9a9fde44-51ed-4d3a-953c-76ac4398bec2"><div style="font-size:1.5em"><img class="icon" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/yang02.png"/></div><div style="width:100%">Create a 4-bit wide, 256-to-1 multiplexer. The 256 4-bit inputs are all packed into a single 1024-bit input vector. sel=0 should select bits in[3:0], sel=1 selects bits in[7:4], sel=2 selects bits in[11:8], etc.</div></figure><h3 id="2c728307-c880-4632-a898-dece270b649b" class="">Example Solution</h3><figure id="eb957953-28e0-4fb7-bf48-921daf357bc1" class="image"><a href="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%2011.png"><img style="width:2559px" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%2011.png"/></a></figure><p id="06ce8fcc-baf6-4af5-822e-2126087b9ca8" class="">
+</p><h3 id="b42e61b4-432d-4fd2-ba4d-1da52241d35f" class="block-color-gray_background">Exercise 8:  <a  target="_blank" href="https://hdlbits.01xz.net/wiki/Hadd">Hadd - HDLBits (01xz.net)</a></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="bd51d353-9575-4c74-a389-72e0e4e403a5"><div style="font-size:1.5em"><img class="icon" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/yang02.png"/></div><div style="width:100%">Make a half adder that can add two bits together (without any carry-in) and gives an output of both the sum and the carry-out.</div></figure><h3 id="6a3bdf02-027a-412f-bc35-31a94d64f191" class="">Example Solution</h3><figure id="63156500-39d5-429a-9fa4-98798b84176e" class="image"><a href="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%2012.png"><img style="width:432px" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%2012.png"/></a></figure><p id="1c588b81-5b98-42ee-b2a5-960bbc5359bf" class="">
+</p><h3 id="a16ab463-b149-42f2-8f58-8d4f20ed6633" class="block-color-gray_background">Exercise 9: <a  target="_blank" href="https://hdlbits.01xz.net/wiki/Fadd">Fadd - HDLBits (01xz.net)</a></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="eeed751e-2f12-4230-a47e-10e9df595b4d"><div style="font-size:1.5em"><img class="icon" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/yang02.png"/></div><div style="width:100%">Make a complete adder that adds three bits, including a carry-in, and gives an output of both the sum and carry-out.</div></figure><h3 id="053ccbc6-dc24-4d37-91e2-713585235abc" class="">Example Solution</h3><figure id="d3d9d5fa-287a-43cf-9eb8-10147ca9fb20" class="image"><a href="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%2013.png"><img style="width:432px" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%2013.png"/></a></figure><h3 id="70e6fb25-eaff-4b05-9079-0676a9363dac" class="">Verilog Simulation Waveform</h3><figure id="c0eece51-dfe6-47b1-8ee5-2aff6f039c90" class="image"><a href="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%2014.png"><img style="width:2628px" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%2014.png"/></a></figure><p id="9c8f538e-8b1b-4526-8b42-0fd952ca5079" class="">
+</p><h3 id="b6a6e08c-594e-49fd-85fb-a12d9bec027a" class="block-color-gray_background">Exercise 10: <a  target="_blank" href="https://hdlbits.01xz.net/wiki/Exams/m2014_q4j">Ripple Adder - HDLBits (01xz.net)</a></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="d52684d3-b3cb-457d-9c79-a68cdf2cf6df"><div style="font-size:1.5em"><img class="icon" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/yang02.png"/></div><div style="width:100%">Create a ripple adder using Verilog continuous assignment.</div></figure><figure id="7d11ccac-74d2-425d-81f2-fa0ce83f004f" class="image"><a href="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Ripple_Adder.png"><img style="width:528px" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Ripple_Adder.png"/></a></figure><h3 id="bfb2fd8d-aad0-4cb0-9151-fc7fdf262932" class="">Example Solution</h3><figure id="9204aafa-8aca-4a0c-87f9-44c677726611" class="image"><a href="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%2015.png"><img style="width:624px" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%2015.png"/></a></figure><p id="21e23c45-b20e-4302-98c0-175d454dff15" class="">
+</p><h3 id="93559ec5-f3df-4da0-8cdd-4cbfb38f53d2" class="block-color-gray_background">Exercise 11:  <a  target="_blank" href="https://hdlbits.01xz.net/wiki/Exams/ece241_2014_q1c">Signed Addition Overflow - HDLBits (01xz.net)</a></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="4938e567-25f2-498f-9b8d-7369cda4f336"><div style="font-size:1.5em"><img class="icon" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/yang02.png"/></div><div style="width:100%">Let&#x27;s say you have two numbers, a[7:0] and b[7:0], each consisting of 8 bits and using 2&#x27;s complement notation. If you add these numbers together, you get s[7:0]. Additionally, check to see if there is a signed overflow in a.</div></figure><h3 id="581be34f-ae7c-42be-8993-5441a8ff3a71" class="">Example Solution</h3><figure id="249693b8-b639-4545-bed6-6895467366a3" class="image"><a href="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%2016.png"><img style="width:2057px" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%2016.png"/></a></figure><h3 id="5718dd5a-e39b-4882-a1c4-73ba32ddac7f" class="">Verilog Simulation Waveform</h3><figure id="0f6985b7-a52f-43f8-9748-9b09228b96e3" class="image"><a href="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%2017.png"><img style="width:2689px" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/Untitled%2017.png"/></a></figure><h2 id="25615e03-e95b-44de-85c5-d3afa831b3ba" class="block-color-teal_background">Assignment</h2><h3 id="73425e05-5558-4fa4-8ebe-9eaa6542a3d5" class="block-color-gray_background">Assignment 1: Take on the challenge of the HDLBits problem sets this week.</h3><p id="d722e314-8308-405d-acfd-c6b072ecb301" class=""><a  target="_blank" href="https://hdlbits.01xz.net/wiki/Adder3">【3-bit binary Adder】Adder3 - HDLBits (01xz.net)</a></p><p id="4d1c0de4-e2b1-45f5-83ee-9565d2d89e0d" class=""><a  target="_blank" href="https://hdlbits.01xz.net/wiki/Adder100">【100-bit binary Adder】Adder100 - HDLBits (01xz.net)</a></p><p id="88c4f3ae-aed1-4e38-84ea-90b203ab9fb8" class=""><a  target="_blank" href="https://hdlbits.01xz.net/wiki/Bcdadd4">【4 digit BCD Adder】 Bcdadd4 - HDLBits (01xz.net)</a></p><p id="b8ff4070-2cf8-433f-b469-ff1469801999" class="">
+</p><p id="ba83592a-b141-47e0-ad57-cb4a8f631234" class="">
+</p><figure id="b1f430db-4a26-4689-85ae-3c67851eb63f" class="image"><a href="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/17.png"><img style="width:1500px" src="Combinational%20Logic%20Circuits%20-%20MUX%20and%20Arithmetic%20%202986b62b1afb49289271f3cb7e951651/17.png"/></a></figure><p id="aa921309-a00a-40eb-b58a-0d8d959c9d0b" class="">
+</p><p id="93c728fb-8259-4591-8db2-d1e2fc740197" class="">
+</p></div></article>
+<script>hljs.highlightAll();</script>
+</body></html>
