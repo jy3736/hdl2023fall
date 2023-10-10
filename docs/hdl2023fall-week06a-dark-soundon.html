@@ -1,0 +1,822 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Auto Grading Assessment - Combinational Logics</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="87ed74e5-5a1d-4e4a-b1bf-7baaba01f017" class="page sans"><header><img class="page-cover-image" src="Auto%20Grading%20Assessment%20-%20Combinational%20Logics%2087ed74e55a1d4e4ab1bf7baaba01f017/3.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="Auto%20Grading%20Assessment%20-%20Combinational%20Logics%2087ed74e55a1d4e4ab1bf7baaba01f017/yang01.png"/></div><h1 class="page-title">Auto Grading Assessment - <strong>Combinational Logics</strong></h1><p class="page-description"></p><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><p id="52e66c07-04c3-4cdf-926f-afa380c02bae" class="">
+</p><h2 id="e2d94a3d-7f9f-446c-a451-3f9ffd156a17" class="block-color-teal_background"><strong>Exercise 1: Decoder Design</strong></h2><p id="b3d7a9cc-9781-4e80-8b73-475689db8032" class="">Design a decoder module that takes a 4-bit vector (din) as input and produces the following outputs: &#x27;odd,&#x27; &#x27;even,&#x27; and &#x27;zero.&#x27; You must use an always statement to implement the <code>decode</code> module. The module name and interface are as follows:</p><pre id="2391ab0b-bab3-4df2-8ee7-58f3ef1d9826" class="code code-wrap"><code>module decode(
+    input [3:0] din,
+    output odd,
+    output even,
+    output zero
+);
+
+</code></pre><p id="29eb93f0-1283-41a2-a739-ddcf6e6214c4" class=""><em>Simulate your design locally.</em></p><pre id="8988f34e-5be4-42fa-9e89-705f82cd7f4e" class="code code-wrap"><code>[ex01]$ iverilog -o ex01 simulation.v
+[ex01]$ ls
+README.md  decode.v  ex01  simulation.v  testbench.v.enc
+[ex01]$ ./ex01
+ 0 0 0 1
+ 4 0 1 0
+ 1 1 0 0
+ 9 1 0 0
+...
+... (omitted for brevity)
+...
+14 0 1 0
+13 1 0 0
+ 9 1 0 0
+15 1 0 0
+ 3 1 0 0
+ 5 1 0 0
+ 8 0 1 0
+
+</code></pre><p id="5fe54fbe-9d9e-4598-807f-f84eac588e55" class=""><em>Run the testing script to validate your solution.</em></p><pre id="5ef70e44-baa5-45c3-be25-8b241214a966" class="code code-wrap"><code>[ex01]$ python ../testing.pyc
+Compilation successful.
+ 0 0 0 1
+ 4 0 1 0
+ 1 1 0 0
+ 9 1 0 0
+ 3 1 0 0
+...
+... (omitted for brevity)
+...
+13 1 0 0
+ 9 1 0 0
+15 1 0 0
+ 3 1 0 0
+ 5 1 0 0
+ 8 0 1 0
+
+Test PASSED.
+</code></pre><p id="d97b8efc-a48d-4007-9d33-0d2e1f4173e4" class="">
+</p><h2 id="7682f2b2-508b-4f4a-9036-f32bb966fceb" class="block-color-teal_background"><strong>Exercise 2: Simple Router Module Design</strong></h2><p id="d052731a-6e08-44b0-8ec9-587efc724e87" class="">You have been tasked with designing a basic router module as illustrated below. This router module is equipped with two input ports, &#x27;a&#x27; and &#x27;b,&#x27; as well as two output ports, &#x27;x&#x27; and &#x27;y.&#x27; The &#x27;sel&#x27; input signal is used to determine the connection between the input and output ports based on the following routing table:</p><ul id="232016ff-7015-4f59-94a7-cd3990096801" class="bulleted-list"><li style="list-style-type:disc">When sel = 0, &#x27;a&#x27; is routed to &#x27;x,&#x27; and &#x27;b&#x27; is routed to &#x27;y.&#x27;</li></ul><ul id="61c32991-10c5-41e2-a3cd-f4068a64b790" class="bulleted-list"><li style="list-style-type:disc">When sel = 1, &#x27;a&#x27; is routed to &#x27;y,&#x27; and &#x27;b&#x27; is routed to &#x27;x.&#x27;</li></ul><ul id="0d9a7187-6e65-4439-86c5-32dff44e451c" class="bulleted-list"><li style="list-style-type:disc">When sel = 2, &#x27;a&#x27; is routed to both &#x27;x&#x27; and &#x27;y.&#x27;</li></ul><ul id="a878b366-c6b7-4735-bbf7-398c9e43b17d" class="bulleted-list"><li style="list-style-type:disc">When sel = 3, &#x27;b&#x27; is routed to both &#x27;x&#x27; and &#x27;y.&#x27;</li></ul><ul id="f4eb2337-121b-4af9-a2b8-9cfd821f1301" class="bulleted-list"><li style="list-style-type:disc">For all other values of sel, &#x27;0&#x27; is routed to both &#x27;x&#x27; and &#x27;y.&#x27;</li></ul><p id="80a7a47c-7c5d-4975-a48c-f21ec11276d8" class="">Here&#x27;s the Verilog code for the router module:</p><pre id="a157140e-42a9-4d94-ab1e-d17e541f248a" class="code code-wrap"><code>module router(
+    input [7:0] a,
+    input [7:0] b,
+    input [1:0] sel,
+    output [7:0] x,
+    output [7:0] y
+);
+
+</code></pre><p id="f7a96b71-d28d-4611-94a2-d34df31c7767" class=""><em>Simulate your design locally.</em></p><pre id="28e27ef3-966d-4edb-a29a-0ca54aeca2d4" class="code code-wrap"><code>[ex02]$ iverilog -o ex02 simulation.v
+[ex02]$ ls
+README.md  ex02  router.v  simulation.v testbench.v.enc
+[ex02]$ ./ex02
+VCD info: dumpfile wave.vcd opened for output.
+                   0   0   0 0   0   0
+                 100  77  73 0  77  73
+                 200  87 160 1 160  87
+                 300  53 130 1 130  53
+                 400  21 152 3 152 152
+...
+... (omitted for brevity)
+...
+                9600 121 206 1 206 121
+                9700 163 199 3 199 199
+                9800 253 180 3 180 180
+                9900  75 225 1 225  75
+               10000  34  30 0  34  30
+
+</code></pre><p id="100d0d38-68d2-4ceb-b625-13eeec9b89d6" class=""><em>Run the testing script to validate your solution.</em></p><pre id="fca78ffe-ba68-463e-94b6-95916fa064d5" class="code code-wrap"><code>[ex02]$ python ../testing.pyc
+Compilation successful.
+VCD info: dumpfile wave.vcd opened for output.
+                   0   0   0 0   0   0
+                 100  77  73 0  77  73
+                 300  87 160 1 160  87
+                 500  53 130 1 130  53
+                 700  21 152 3 152 152
+                 900  94 195 1 195  94
+...
+... (omitted for brevity)
+...
+               19100 121 206 1 206 121
+               19300 163 199 3 199 199
+               19500 253 180 3 180 180
+               19700  75 225 1 225  75
+               19900  34  30 0  34  30
+
+Test PASSED.
+</code></pre><p id="bf407f63-deb6-4815-b591-7f70159e8771" class="">
+</p><h2 id="f1a3a48f-7683-4c52-a11f-7b36197360b4" class="block-color-teal_background"><strong>Exercise 3: Structural Modeling of a Ripple Carry Adder</strong></h2><p id="b7e4bf49-6b7b-431c-96ba-7a9ef4b97990" class="">Your task is to create a structural model of an 8-bit ripple carry adder. This design should be modular and utilize the full adder module (<code>fadd</code>) within the working directory. The implementation should be in Verilog and subsequently tested with the provided testing script.</p><p id="d86b2778-e422-4240-b2be-1e0a21ac2c68" class="">Below is the Verilog code for the 8-bit ripple carry adder module:</p><pre id="c9b0a4a5-cb94-4f0e-af42-a56648e70b83" class="code code-wrap"><code>`include &quot;fadd.v&quot;
+
+module rpfadd8(
+    input cin,
+    input [7:0] a,
+    input [7:0] b,
+    output [7:0] sum,
+    output cout
+);
+
+</code></pre><p id="7e6131cb-4638-49c8-af79-f1153ddc56d5" class=""><em>Simulate your design locally.</em></p><pre id="070ad51b-9163-4f8b-a331-2c4011f682e4" class="code code-wrap"><code>[ex03]$ iverilog -o ex03 simulation.v
+[ex03]$ ./ex03
+VCD info: dumpfile wave.vcd opened for output.
+                   0   0   0 0   0 0
+                 100 154 146 0  44 1
+                 200 175  64 1 240 0
+                 300 107   4 1 112 0
+                 400  43  49 1  93 0
+                 500 189 134 1  68 1
+...
+... (omited for brevity)
+...
+                9500 192 182 1 119 1
+                9600 243 156 1 144 1
+                9700  71 143 1 215 0
+                9800 251 105 1 101 1
+                9900 151 194 1  90 1
+               10000  68  60 0 128 0
+
+</code></pre><p id="4189a2a8-58fd-410b-8644-5266abe7684c" class=""><em>Run the testing script to validate your solution.</em></p><pre id="7d059cd5-89e7-4e90-a8ec-d51ca3d4b25a" class="code code-wrap"><code>[ex03]$ python ../testing.pyc
+Compilation successful.
+VCD info: dumpfile wave.vcd opened for output.
+                   0   0   0 0   0 0
+                 100 154 146 0  44 1
+                 300 175  64 1 240 0
+                 500 107   4 1 112 0
+                 700  43  49 1  93 0
+                 900 189 134 1  68 1
+...
+... (omited for brevity)
+...
+               18900 192 182 1 119 1
+               19100 243 156 1 144 1
+               19300  71 143 1 215 0
+               19500 251 105 1 101 1
+               19700 151 194 1  90 1
+               19900  68  60 0 128 0
+
+Test PASSED.
+</code></pre><p id="2e529078-e234-4899-8ebd-f8f45dfb4cb9" class="">
+</p><figure id="5ba24a8b-514e-4532-bc93-dc05f02d8b6c" class="image"><a href="Auto%20Grading%20Assessment%20-%20Combinational%20Logics%2087ed74e55a1d4e4ab1bf7baaba01f017/14.png"><img style="width:1500px" src="Auto%20Grading%20Assessment%20-%20Combinational%20Logics%2087ed74e55a1d4e4ab1bf7baaba01f017/14.png"/></a></figure><p id="e759214d-3e60-4860-a6b7-3e2b74998cb5" class="">
+</p></div></article>
+<script>hljs.highlightAll();</script>
+</body></html>
