@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Auto Grading Assessment - Combinational Logics</title><style>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Auto Grading Assessment - Combinational Logics (week05)</title><style>
 /* cspell:disable-file */
 /* webkit printing magic: print all background colors */
 html {
@@ -673,15 +673,12 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="87ed74e5-5a1d-4e4a-b1bf-7baaba01f017" class="page sans"><header><img class="page-cover-image" src="Auto%20Grading%20Assessment%20-%20Combinational%20Logics%2087ed74e55a1d4e4ab1bf7baaba01f017/3.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="Auto%20Grading%20Assessment%20-%20Combinational%20Logics%2087ed74e55a1d4e4ab1bf7baaba01f017/yang01.png"/></div><h1 class="page-title">Auto Grading Assessment - <strong>Combinational Logics</strong></h1><p class="page-description"></p><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><p id="52e66c07-04c3-4cdf-926f-afa380c02bae" class="">
-</p><h2 id="e2d94a3d-7f9f-446c-a451-3f9ffd156a17" class="block-color-teal_background"><strong>Exercise 1: Decoder Design</strong></h2><p id="b3d7a9cc-9781-4e80-8b73-475689db8032" class="">Design a decoder module that takes a 4-bit vector (din) as input and produces the following outputs: <code>odd</code>, <code>even</code>, and <code>zero</code>. You must use <code>always</code> and <code>if</code> statements to implement the <code>decode</code> module. The module name and interface are as follows:</p><pre id="2391ab0b-bab3-4df2-8ee7-58f3ef1d9826" class="code code-wrap"><code>module decode(
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="87ed74e5-5a1d-4e4a-b1bf-7baaba01f017" class="page sans"><header><img class="page-cover-image" src="Auto%20Grading%20Assessment%20-%20Combinational%20Logics%20(we%2087ed74e55a1d4e4ab1bf7baaba01f017/3.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="Auto%20Grading%20Assessment%20-%20Combinational%20Logics%20(we%2087ed74e55a1d4e4ab1bf7baaba01f017/yang01.png"/></div><h1 class="page-title">Auto Grading Assessment - <strong>Combinational Logics (week05)</strong></h1><p class="page-description"></p><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><h3 id="e2d94a3d-7f9f-446c-a451-3f9ffd156a17" class="block-color-teal_background"><strong>Exercise 1: Decoder Design</strong></h3><div><iframe src="https://player.soundon.fm/embed/?podcast=cb308500-1e9b-4455-86fa-ba6749533b0c&episode=ef30dc19-8ae3-472a-bf5d-08438c59aee0" id="soundon"></iframe></div><p id="b3d7a9cc-9781-4e80-8b73-475689db8032" class="">Design a decoder module that takes a 4-bit vector (din) as input and produces the following outputs: <code>odd</code>, <code>even</code>, and <code>zero</code>. You must use <code>always</code> and <code>if</code> statements to implement the <code>decode</code> module. The module name and interface are as follows:</p><pre id="2391ab0b-bab3-4df2-8ee7-58f3ef1d9826" class="code code-wrap"><code>module decode(
     input [3:0] din,
     output reg odd,
     output reg even,
     output reg zero
-);
-
-</code></pre><p id="29eb93f0-1283-41a2-a739-ddcf6e6214c4" class=""><em>Simulate your design locally.</em></p><pre id="8988f34e-5be4-42fa-9e89-705f82cd7f4e" class="code code-wrap"><code>[ex01]$ iverilog -o ex01 simulation.v
+);</code></pre><p id="29eb93f0-1283-41a2-a739-ddcf6e6214c4" class=""><em>Simulate your design locally.</em></p><pre id="8988f34e-5be4-42fa-9e89-705f82cd7f4e" class="code code-wrap"><code>[ex01]$ iverilog -o ex01 simulation.v
 [ex01]$ ls
 README.md  decode.v  ex01  simulation.v  testbench.v.enc
 [ex01]$ ./ex01
@@ -698,9 +695,7 @@ README.md  decode.v  ex01  simulation.v  testbench.v.enc
 15 1 0 0
  3 1 0 0
  5 1 0 0
- 8 0 1 0
-
-</code></pre><p id="5fe54fbe-9d9e-4598-807f-f84eac588e55" class=""><em>Run the testing script to validate your solution.</em></p><pre id="5ef70e44-baa5-45c3-be25-8b241214a966" class="code code-wrap"><code>[ex01]$ python ../testing.pyc
+ 8 0 1 0</code></pre><p id="5fe54fbe-9d9e-4598-807f-f84eac588e55" class=""><em>Run the testing script to validate your solution.</em></p><pre id="5ef70e44-baa5-45c3-be25-8b241214a966" class="code code-wrap"><code>[ex01]$ python ../testing.pyc
 Compilation successful.
  0 0 0 1
  4 0 1 0
@@ -717,17 +712,14 @@ Compilation successful.
  5 1 0 0
  8 0 1 0
 
-Test PASSED.
-</code></pre><p id="d97b8efc-a48d-4007-9d33-0d2e1f4173e4" class="">
-</p><h2 id="7682f2b2-508b-4f4a-9036-f32bb966fceb" class="block-color-teal_background"><strong>Exercise 2: Simple Router Module Design</strong></h2><p id="d052731a-6e08-44b0-8ec9-587efc724e87" class="">You have been tasked with designing a basic router module as illustrated below. This router module is equipped with two input ports, <code>a</code> and <code>b</code>, as well as two output ports, <code>x</code> and <code>y</code>. The <code>sel</code> input signal is used to determine the connection between the input and output ports based on the following routing table:</p><ul id="232016ff-7015-4f59-94a7-cd3990096801" class="bulleted-list"><li style="list-style-type:disc">When sel = 0, &#x27;a&#x27; is routed to &#x27;x,&#x27; and &#x27;b&#x27; is routed to &#x27;y.&#x27;</li></ul><ul id="61c32991-10c5-41e2-a3cd-f4068a64b790" class="bulleted-list"><li style="list-style-type:disc">When sel = 1, &#x27;a&#x27; is routed to &#x27;y,&#x27; and &#x27;b&#x27; is routed to &#x27;x.&#x27;</li></ul><ul id="0d9a7187-6e65-4439-86c5-32dff44e451c" class="bulleted-list"><li style="list-style-type:disc">When sel = 2, &#x27;a&#x27; is routed to both &#x27;x&#x27; and &#x27;y.&#x27;</li></ul><ul id="a878b366-c6b7-4735-bbf7-398c9e43b17d" class="bulleted-list"><li style="list-style-type:disc">When sel = 3, &#x27;b&#x27; is routed to both &#x27;x&#x27; and &#x27;y.&#x27;</li></ul><ul id="f4eb2337-121b-4af9-a2b8-9cfd821f1301" class="bulleted-list"><li style="list-style-type:disc">For all other values of sel, &#x27;0&#x27; is routed to both &#x27;x&#x27; and &#x27;y.&#x27;</li></ul><p id="80a7a47c-7c5d-4975-a48c-f21ec11276d8" class="">Here&#x27;s the Verilog code for the router module:</p><pre id="a157140e-42a9-4d94-ab1e-d17e541f248a" class="code code-wrap"><code>module router(
+Test PASSED.</code></pre><p id="d97b8efc-a48d-4007-9d33-0d2e1f4173e4" class="">
+</p><h3 id="7682f2b2-508b-4f4a-9036-f32bb966fceb" class="block-color-teal_background"><strong>Exercise 2: Simple Router Module Design</strong></h3><div><iframe src="https://player.soundon.fm/embed/?podcast=cb308500-1e9b-4455-86fa-ba6749533b0c&episode=2114c15a-104d-44c3-b1f1-42dbb99592e0" id="soundon"></iframe></div><p id="d052731a-6e08-44b0-8ec9-587efc724e87" class="">You have been tasked with designing a basic router module as illustrated below. This router module is equipped with two input ports, <code>a</code> and <code>b</code>, as well as two output ports, <code>x</code> and <code>y</code>. The <code>sel</code> input signal is used to determine the connection between the input and output ports based on the following routing table:</p><ul id="232016ff-7015-4f59-94a7-cd3990096801" class="bulleted-list"><li style="list-style-type:disc">When sel = 0, <code>a</code> is routed to <code>x</code>, and <code>b</code> is routed to <code>y</code>.</li></ul><ul id="61c32991-10c5-41e2-a3cd-f4068a64b790" class="bulleted-list"><li style="list-style-type:disc">When sel = 1, <code>a</code>  is routed to <code>y</code>, and <code>b</code> is routed to <code>x</code>.</li></ul><ul id="0d9a7187-6e65-4439-86c5-32dff44e451c" class="bulleted-list"><li style="list-style-type:disc">When sel = 2, <code>a</code>  is routed to both <code>x</code> and <code>y</code>.</li></ul><ul id="a878b366-c6b7-4735-bbf7-398c9e43b17d" class="bulleted-list"><li style="list-style-type:disc">When sel = 3, <code>b</code> is routed to both <code>x</code> and <code>y</code>.</li></ul><ul id="f4eb2337-121b-4af9-a2b8-9cfd821f1301" class="bulleted-list"><li style="list-style-type:disc">For all other values of sel, <code>0</code> is routed to both <code>x</code> and <code>y</code>.</li></ul><p id="80a7a47c-7c5d-4975-a48c-f21ec11276d8" class="">Here&#x27;s the Verilog code for the router module:</p><pre id="a157140e-42a9-4d94-ab1e-d17e541f248a" class="code code-wrap"><code>module router(
     input [7:0] a,
     input [7:0] b,
     input [1:0] sel,
     output [7:0] x,
     output [7:0] y
-);
-
-</code></pre><p id="f7a96b71-d28d-4611-94a2-d34df31c7767" class=""><em>Simulate your design locally.</em></p><pre id="28e27ef3-966d-4edb-a29a-0ca54aeca2d4" class="code code-wrap"><code>[ex02]$ iverilog -o ex02 simulation.v
+);</code></pre><p id="f7a96b71-d28d-4611-94a2-d34df31c7767" class=""><em>Simulate your design locally.</em></p><pre id="28e27ef3-966d-4edb-a29a-0ca54aeca2d4" class="code code-wrap"><code>[ex02]$ iverilog -o ex02 simulation.v
 [ex02]$ ls
 README.md  ex02  router.v  simulation.v testbench.v.enc
 [ex02]$ ./ex02
@@ -744,9 +736,7 @@ VCD info: dumpfile wave.vcd opened for output.
                 9700 163 199 3 199 199
                 9800 253 180 3 180 180
                 9900  75 225 1 225  75
-               10000  34  30 0  34  30
-
-</code></pre><p id="100d0d38-68d2-4ceb-b625-13eeec9b89d6" class=""><em>Run the testing script to validate your solution.</em></p><pre id="fca78ffe-ba68-463e-94b6-95916fa064d5" class="code code-wrap"><code>[ex02]$ python ../testing.pyc
+               10000  34  30 0  34  30</code></pre><p id="100d0d38-68d2-4ceb-b625-13eeec9b89d6" class=""><em>Run the testing script to validate your solution.</em></p><pre id="fca78ffe-ba68-463e-94b6-95916fa064d5" class="code code-wrap"><code>[ex02]$ python ../testing.pyc
 Compilation successful.
 VCD info: dumpfile wave.vcd opened for output.
                    0   0   0 0   0   0
@@ -764,9 +754,8 @@ VCD info: dumpfile wave.vcd opened for output.
                19700  75 225 1 225  75
                19900  34  30 0  34  30
 
-Test PASSED.
-</code></pre><p id="bf407f63-deb6-4815-b591-7f70159e8771" class="">
-</p><h2 id="f1a3a48f-7683-4c52-a11f-7b36197360b4" class="block-color-teal_background"><strong>Exercise 3: Structural Modeling of a Ripple Carry Adder</strong></h2><p id="b7e4bf49-6b7b-431c-96ba-7a9ef4b97990" class="">Your task is to create a <code>structural model</code> of an 8-bit ripple carry adder. This design should be modular and utilize the full adder module (<code>fadd</code>) within the working directory. The implementation should be in Verilog and subsequently tested with the provided testing script.</p><p id="d86b2778-e422-4240-b2be-1e0a21ac2c68" class="">Below is the Verilog code for the 8-bit ripple carry adder module:</p><pre id="c9b0a4a5-cb94-4f0e-af42-a56648e70b83" class="code code-wrap"><code>`include &quot;fadd.v&quot;
+Test PASSED.</code></pre><p id="bf407f63-deb6-4815-b591-7f70159e8771" class="">
+</p><h3 id="f1a3a48f-7683-4c52-a11f-7b36197360b4" class="block-color-teal_background"><strong>Exercise 3: Structural Modeling of a Ripple Carry Adder</strong></h3><div><iframe src="https://player.soundon.fm/embed/?podcast=cb308500-1e9b-4455-86fa-ba6749533b0c&episode=57e4fd2b-1c60-4ef3-83bc-d5987bc0d2b2" id="soundon"></iframe></div><p id="b7e4bf49-6b7b-431c-96ba-7a9ef4b97990" class="">Your task is to create a <code>structural model</code> of an 8-bit ripple carry adder. This design should be modular and utilize the full adder module (<code>fadd</code>) within the working directory. The implementation should be in Verilog and subsequently tested with the provided testing script.</p><p id="d86b2778-e422-4240-b2be-1e0a21ac2c68" class="">Below is the Verilog code for the 8-bit ripple carry adder module:</p><pre id="c9b0a4a5-cb94-4f0e-af42-a56648e70b83" class="code code-wrap"><code>`include &quot;fadd.v&quot;
 
 module rpfadd8(
     input cin,
@@ -774,9 +763,7 @@ module rpfadd8(
     input [7:0] b,
     output [7:0] sum,
     output cout
-);
-
-</code></pre><p id="7e6131cb-4638-49c8-af79-f1153ddc56d5" class=""><em>Simulate your design locally.</em></p><pre id="070ad51b-9163-4f8b-a331-2c4011f682e4" class="code code-wrap"><code>[ex03]$ iverilog -o ex03 simulation.v
+);</code></pre><p id="7e6131cb-4638-49c8-af79-f1153ddc56d5" class=""><em>Simulate your design locally.</em></p><pre id="070ad51b-9163-4f8b-a331-2c4011f682e4" class="code code-wrap"><code>[ex03]$ iverilog -o ex03 simulation.v
 [ex03]$ ./ex03
 VCD info: dumpfile wave.vcd opened for output.
                    0   0   0 0   0 0
@@ -793,9 +780,7 @@ VCD info: dumpfile wave.vcd opened for output.
                 9700  71 143 1 215 0
                 9800 251 105 1 101 1
                 9900 151 194 1  90 1
-               10000  68  60 0 128 0
-
-</code></pre><p id="4189a2a8-58fd-410b-8644-5266abe7684c" class=""><em>Run the testing script to validate your solution.</em></p><pre id="7d059cd5-89e7-4e90-a8ec-d51ca3d4b25a" class="code code-wrap"><code>[ex03]$ python ../testing.pyc
+               10000  68  60 0 128 0</code></pre><p id="4189a2a8-58fd-410b-8644-5266abe7684c" class=""><em>Run the testing script to validate your solution.</em></p><pre id="7d059cd5-89e7-4e90-a8ec-d51ca3d4b25a" class="code code-wrap"><code>[ex03]$ python ../testing.pyc
 Compilation successful.
 VCD info: dumpfile wave.vcd opened for output.
                    0   0   0 0   0 0
@@ -814,9 +799,8 @@ VCD info: dumpfile wave.vcd opened for output.
                19700 151 194 1  90 1
                19900  68  60 0 128 0
 
-Test PASSED.
-</code></pre><p id="2e529078-e234-4899-8ebd-f8f45dfb4cb9" class="">
-</p><figure id="5ba24a8b-514e-4532-bc93-dc05f02d8b6c" class="image"><a href="Auto%20Grading%20Assessment%20-%20Combinational%20Logics%2087ed74e55a1d4e4ab1bf7baaba01f017/14.png"><img style="width:1500px" src="Auto%20Grading%20Assessment%20-%20Combinational%20Logics%2087ed74e55a1d4e4ab1bf7baaba01f017/14.png"/></a></figure><p id="e759214d-3e60-4860-a6b7-3e2b74998cb5" class="">
-</p></div></article>
+Test PASSED.</code></pre><p id="2e529078-e234-4899-8ebd-f8f45dfb4cb9" class="">
+</p><figure id="5ba24a8b-514e-4532-bc93-dc05f02d8b6c" class="image"><a href="Auto%20Grading%20Assessment%20-%20Combinational%20Logics%20(we%2087ed74e55a1d4e4ab1bf7baaba01f017/14.png"><img style="width:1500px" src="Auto%20Grading%20Assessment%20-%20Combinational%20Logics%20(we%2087ed74e55a1d4e4ab1bf7baaba01f017/14.png"/></a></figure><p id="e759214d-3e60-4860-a6b7-3e2b74998cb5" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span>
 <script>hljs.highlightAll();</script>
 </body></html>

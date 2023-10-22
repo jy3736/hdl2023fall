@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Auto Grading Assessment - MUX and Arithmetic Circuits</title><style>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Auto Grading Assessment - MUX and Arithmetic Circuits (week06)</title><style>
 /* cspell:disable-file */
 /* webkit printing magic: print all background colors */
 html {
@@ -673,7 +673,7 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="b65e4284-5114-481f-9dff-cb3e6a59cc8b" class="page sans"><header><img class="page-cover-image" src="Auto%20Grading%20Assessment%20-%20MUX%20and%20Arithmetic%20Circu%20b65e42845114481f9dffcb3e6a59cc8b/3.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="Auto%20Grading%20Assessment%20-%20MUX%20and%20Arithmetic%20Circu%20b65e42845114481f9dffcb3e6a59cc8b/yang01.png"/></div><h1 class="page-title">Auto Grading Assessment - <strong>MUX and Arithmetic Circuits</strong></h1><p class="page-description"></p><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><h2 id="b8f06c03-2d21-4952-a1c6-531ae80d8fd3" class="block-color-teal_background"><strong>Exercise 1: 4-bit BCD Full Adder</strong></h2><p id="dad4f6df-69f7-482f-bc42-a15753f54798" class="">In this exercise, you will be tasked with implementing a 4-bit BCD full adder. The BCD full adder is a combinational circuit designed to add two 4-bit BCD numbers and generate both a 4-bit BCD sum and a carry bit. You must utilize the <code>always</code> statement to implement the combinational logic. Below is the module declaration for the BCD full adder. It is essential to ensure that all <code>computation statements</code> are enclosed within the <code>always</code> block, and no combinational logic should exist outside of this block.</p><pre id="c88dd985-9bd3-4297-8ef8-48c490a82725" class="code code-wrap"><code>module bcdfadd4(
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="b65e4284-5114-481f-9dff-cb3e6a59cc8b" class="page sans"><header><img class="page-cover-image" src="Auto%20Grading%20Assessment%20-%20MUX%20and%20Arithmetic%20Circu%20b65e42845114481f9dffcb3e6a59cc8b/3.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="Auto%20Grading%20Assessment%20-%20MUX%20and%20Arithmetic%20Circu%20b65e42845114481f9dffcb3e6a59cc8b/yang01.png"/></div><h1 class="page-title">Auto Grading Assessment - <strong>MUX and Arithmetic Circuits (week06)</strong></h1><p class="page-description"></p><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><h3 id="b8f06c03-2d21-4952-a1c6-531ae80d8fd3" class="block-color-teal_background"><strong>Exercise 1: 4-bit BCD Full Adder</strong></h3><div><iframe src="https://player.soundon.fm/embed/?podcast=cb308500-1e9b-4455-86fa-ba6749533b0c&episode=01332137-adf0-4c90-be0e-b8cc1da03873" id="soundon"></iframe></div><p id="dad4f6df-69f7-482f-bc42-a15753f54798" class="">In this exercise, you will be tasked with implementing a 4-bit BCD full adder. The BCD full adder is a combinational circuit designed to add two 4-bit BCD numbers and generate both a 4-bit BCD sum and a carry bit. You must utilize the <code>always</code> statement to implement the combinational logic. Below is the module declaration for the BCD full adder. It is essential to ensure that all <code>computation statements</code> are enclosed within the <code>always</code> block, and no combinational logic should exist outside of this block.</p><pre id="c88dd985-9bd3-4297-8ef8-48c490a82725" class="code code-wrap"><code>module bcdfadd4(
   input wire [3:0] a,
   input wire [3:0] b,
   input wire cin,
@@ -716,17 +716,14 @@ VCD info: dumpfile wave.vcd opened for output.
              9900000  2  2 1 0  5
             10000000  3  2 0 0  5
 
-Test PASSED.
-</code></pre><p id="377fb66e-8daf-4b99-bc09-5e0cb6a0235c" class="">
-</p><h2 id="47c25a08-58af-4994-aabb-c127dc7f8205" class="block-color-teal_background"><strong>Exercise 2: 16-bit BCD Full Adder</strong></h2><p id="04d29d06-8f46-4b21-a0ee-1e3201713985" class="">In this exercise, you will be tasked with implementing a 16-bit BCD full adder using structural-level Verilog. It&#x27;s essential to have already completed Exercise 1, where you designed your 4-bit BCD full adder (<code>bcdfadd4</code>), as this exercise relies on it for completion.</p><pre id="f074c510-2e2d-4752-8766-4f234055bec7" class="code code-wrap"><code>module bcdfadd16(
+Test PASSED.</code></pre><p id="377fb66e-8daf-4b99-bc09-5e0cb6a0235c" class="">
+</p><h3 id="47c25a08-58af-4994-aabb-c127dc7f8205" class="block-color-teal_background"><strong>Exercise 2: 16-bit BCD Full Adder</strong></h3><div><iframe src="https://player.soundon.fm/embed/?podcast=cb308500-1e9b-4455-86fa-ba6749533b0c&episode=5238800d-56ee-4ce4-a0b8-25a38f287e42" id="soundon"></iframe></div><p id="04d29d06-8f46-4b21-a0ee-1e3201713985" class="">In this exercise, you will be tasked with implementing a 16-bit BCD full adder using structural-level Verilog. It&#x27;s essential to have already completed Exercise 1, where you designed your 4-bit BCD full adder (<code>bcdfadd4</code>), as this exercise relies on it for completion.</p><pre id="f074c510-2e2d-4752-8766-4f234055bec7" class="code code-wrap"><code>module bcdfadd16(
   input wire [15:0] a,
   input wire [15:0] b,
   input wire cin,
   output wire [15:0] sum,
   output wire cout
-);
-
-</code></pre><p id="21eb2669-5f80-4d2c-8964-2e12ad73e29d" class=""><em>Structural-level Design</em></p><figure id="2b462e23-2c18-4277-b201-a78aeacc16aa" class="image"><a href="Auto%20Grading%20Assessment%20-%20MUX%20and%20Arithmetic%20Circu%20b65e42845114481f9dffcb3e6a59cc8b/struct-level.png"><img style="width:2413px" src="Auto%20Grading%20Assessment%20-%20MUX%20and%20Arithmetic%20Circu%20b65e42845114481f9dffcb3e6a59cc8b/struct-level.png"/></a></figure><p id="a1c97dce-eeec-49a7-a4cc-af43206fd7ea" class="">
+);</code></pre><p id="21eb2669-5f80-4d2c-8964-2e12ad73e29d" class=""><em>Structural-level Design</em></p><figure id="2b462e23-2c18-4277-b201-a78aeacc16aa" class="image"><a href="Auto%20Grading%20Assessment%20-%20MUX%20and%20Arithmetic%20Circu%20b65e42845114481f9dffcb3e6a59cc8b/struct-level.png"><img style="width:2413px" src="Auto%20Grading%20Assessment%20-%20MUX%20and%20Arithmetic%20Circu%20b65e42845114481f9dffcb3e6a59cc8b/struct-level.png"/></a></figure><p id="a1c97dce-eeec-49a7-a4cc-af43206fd7ea" class="">
 </p><p id="f5f7ead2-9d9c-4a3a-bcc6-e20d4977fc61" class=""><em>Simulate your design locally.</em></p><pre id="7ae9f9b1-123a-4804-b485-5bc5c300373c" class="code code-wrap"><code>[ex02]$ iverilog -o ex02 simulation.v
 [ex02]$ ./ex02
 VCD info: dumpfile wave.vcd opened for output.
@@ -742,9 +739,7 @@ VCD info: dumpfile wave.vcd opened for output.
              9700000 5219 7357 1 1 2577
              9800000 6294 9078 0 1 5372
              9900000 6825 4670 1 1 1496
-            10000000 2096 4039 1 0 6136
-
-</code></pre><p id="287a8c18-bc94-4bda-9cbb-4bec24e177f5" class=""><em>You can also view the waveform (wave.vcd) using vscode&#x27; plugin.</em></p><figure id="99c5e03e-d299-4a01-96c9-2c69d117d2cb" class="image"><a href="Auto%20Grading%20Assessment%20-%20MUX%20and%20Arithmetic%20Circu%20b65e42845114481f9dffcb3e6a59cc8b/bcdfadd16.png"><img style="width:2619px" src="Auto%20Grading%20Assessment%20-%20MUX%20and%20Arithmetic%20Circu%20b65e42845114481f9dffcb3e6a59cc8b/bcdfadd16.png"/></a></figure><p id="d85ea0ac-fb00-411c-9305-06922a9bbdbe" class="">
+            10000000 2096 4039 1 0 6136</code></pre><p id="287a8c18-bc94-4bda-9cbb-4bec24e177f5" class=""><em>You can also view the waveform (wave.vcd) using vscode&#x27; plugin.</em></p><figure id="99c5e03e-d299-4a01-96c9-2c69d117d2cb" class="image"><a href="Auto%20Grading%20Assessment%20-%20MUX%20and%20Arithmetic%20Circu%20b65e42845114481f9dffcb3e6a59cc8b/bcdfadd16.png"><img style="width:2619px" src="Auto%20Grading%20Assessment%20-%20MUX%20and%20Arithmetic%20Circu%20b65e42845114481f9dffcb3e6a59cc8b/bcdfadd16.png"/></a></figure><p id="d85ea0ac-fb00-411c-9305-06922a9bbdbe" class="">
 </p><p id="48b9bc53-7278-438f-96ae-876166c3f159" class=""><em>Run the testing script to validate your solution.</em></p><pre id="a1922c1d-f2d5-44ef-99ff-8975cf9fb264" class="code code-wrap"><code>[ex02]$ python ../testing.py
 Compilation successful.
 VCD info: dumpfile wave.vcd opened for output.
@@ -764,17 +759,14 @@ VCD info: dumpfile wave.vcd opened for output.
              9900000 6825 4670 1 1 1496
             10000000 2096 4039 1 0 6136
 
-Test PASSED.
-</code></pre><p id="f0282e83-1455-4ea9-b0a0-d890a425ae17" class="">
-</p><h2 id="2f206414-133a-44b4-abed-9623ebdb334e" class="block-color-teal_background"><strong>Exercise 3: An 8-bit Arithmetic Logic Unit (ALU)</strong></h2><p id="6ae6a7c4-2b97-4e70-9fd9-a89e275b567f" class="">In this exercise, you will be constructing an 8-bit Arithmetic Logic Unit (ALU). The 8-bit ALU will possess the following interface and functions based on the opcode. The carry-out (CO) signal is utilized to signify overflow. Depending on the opcode ranging from 0 to 7, the ALU will carry out the following operations: zero (0), addition (add), subtraction (sub), bitwise AND (and), bitwise OR (or), bitwise XOR (xor), and finally, provide the inputs &#x27;a&#x27; and &#x27;b&#x27; directly to the ALU.</p><pre id="9460e958-8be4-4ac3-99eb-39e7dd16f72f" class="code code-wrap"><code>module alu(
+Test PASSED.</code></pre><p id="f0282e83-1455-4ea9-b0a0-d890a425ae17" class="">
+</p><h3 id="2f206414-133a-44b4-abed-9623ebdb334e" class="block-color-teal_background"><strong>Exercise 3: An 8-bit Arithmetic Logic Unit (ALU)</strong></h3><div><iframe src="https://player.soundon.fm/embed/?podcast=cb308500-1e9b-4455-86fa-ba6749533b0c&episode=1f60724f-0566-4a2d-a290-748caacb65bb" id="soundon"></iframe></div><p id="6ae6a7c4-2b97-4e70-9fd9-a89e275b567f" class="">In this exercise, you will be constructing an 8-bit Arithmetic Logic Unit (ALU). The 8-bit ALU will possess the following interface and functions based on the opcode. The carry-out (CO) signal is utilized to signify overflow. Depending on the opcode ranging from 0 to 7, the ALU will carry out the following operations: <div class="indented"><ol type="1" id="b0d2cbdb-83f9-4ba1-9cfe-8c471fa48c53" class="numbered-list" start="1"><li>zero (0): result = 0</li></ol><ol type="1" id="36b1e20c-763a-4548-ab1a-9b4c550d0c88" class="numbered-list" start="2"><li>addition (add): result = a + b</li></ol><ol type="1" id="3399c5ba-00b2-4231-986f-b6d9509392f7" class="numbered-list" start="3"><li>subtraction (sub): result = a - b</li></ol><ol type="1" id="d5d3c746-6cc0-4f50-bd4f-252fad1a08ea" class="numbered-list" start="4"><li>bitwise AND (and): result = a &amp; b</li></ol><ol type="1" id="21918f63-e987-4055-b874-4363b5b5824f" class="numbered-list" start="5"><li>bitwise OR (or): result = a | b</li></ol><ol type="1" id="a9b7fb01-13c1-4ff3-877d-2e6f6875bb40" class="numbered-list" start="6"><li>bitwise XOR (xor): result  = a ^b</li></ol><ol type="1" id="b7aab400-d692-414f-a392-638edb52060b" class="numbered-list" start="7"><li>Provide the input <code>a</code> directly to the ALU: result = a</li></ol><ol type="1" id="63fa428a-5f82-42ec-9adf-93be86436fdd" class="numbered-list" start="8"><li>Provide the input <code>b</code> directly to the ALU: result = b</li></ol></div></p><pre id="9460e958-8be4-4ac3-99eb-39e7dd16f72f" class="code code-wrap"><code>module alu(
     input [7:0] a,
     input [7:0] b,
     input [2:0] opcode,
     output [7:0] result,
     output co
-);
-
-</code></pre><p id="5a3b5769-c358-4a1e-b02c-d39e245dfbfe" class=""><em>Xilinx Vivado Synthesized Schematic</em></p><figure id="a654e91c-8d69-4fe1-8482-a39d67d67536" class="image"><a href="Auto%20Grading%20Assessment%20-%20MUX%20and%20Arithmetic%20Circu%20b65e42845114481f9dffcb3e6a59cc8b/alu8.png"><img style="width:2103px" src="Auto%20Grading%20Assessment%20-%20MUX%20and%20Arithmetic%20Circu%20b65e42845114481f9dffcb3e6a59cc8b/alu8.png"/></a></figure><p id="03944379-7dc6-4709-bda7-5bb8a0628cab" class="">
+);</code></pre><p id="5a3b5769-c358-4a1e-b02c-d39e245dfbfe" class=""><em>Xilinx Vivado Synthesized Schematic</em></p><figure id="a654e91c-8d69-4fe1-8482-a39d67d67536" class="image"><a href="Auto%20Grading%20Assessment%20-%20MUX%20and%20Arithmetic%20Circu%20b65e42845114481f9dffcb3e6a59cc8b/alu8.png"><img style="width:2103px" src="Auto%20Grading%20Assessment%20-%20MUX%20and%20Arithmetic%20Circu%20b65e42845114481f9dffcb3e6a59cc8b/alu8.png"/></a></figure><p id="03944379-7dc6-4709-bda7-5bb8a0628cab" class="">
 </p><p id="ed5d228b-7bff-4fce-a255-a998cf2a169b" class=""><em>Simulate your design locally.</em></p><pre id="9599a1fd-4dbe-401b-a4c1-a24249abd2d1" class="code code-wrap"><code>[ex03]$ iverilog simulation.v
 [ex03]$ ./a.out
 VCD info: dumpfile wave.vcd opened for output.
@@ -790,9 +782,7 @@ VCD info: dumpfile wave.vcd opened for output.
              9700000 51 e3 7 0 e3
              9800000 7e da 3 0 5a
              9900000 25 f0 5 0 d5
-            10000000 91 0f 0 0 00
-
-</code></pre><p id="4e67bd7b-a6a8-41b3-8165-18ce94bc0665" class=""><em>You can also view the waveform (wave.vcd) using vscode&#x27; plugin.</em></p><figure id="36fc0017-3a47-442c-9cf4-7006fbdf85a9" class="image"><a href="Auto%20Grading%20Assessment%20-%20MUX%20and%20Arithmetic%20Circu%20b65e42845114481f9dffcb3e6a59cc8b/sim01.png"><img style="width:1947px" src="Auto%20Grading%20Assessment%20-%20MUX%20and%20Arithmetic%20Circu%20b65e42845114481f9dffcb3e6a59cc8b/sim01.png"/></a></figure><figure id="b34ccd12-92ca-4244-9bec-9c8c7f1fc013" class="image"><a href="Auto%20Grading%20Assessment%20-%20MUX%20and%20Arithmetic%20Circu%20b65e42845114481f9dffcb3e6a59cc8b/sim02.png"><img style="width:2136px" src="Auto%20Grading%20Assessment%20-%20MUX%20and%20Arithmetic%20Circu%20b65e42845114481f9dffcb3e6a59cc8b/sim02.png"/></a></figure><p id="5dd880ad-64d5-4671-82b2-142758911b49" class="">
+            10000000 91 0f 0 0 00</code></pre><p id="4e67bd7b-a6a8-41b3-8165-18ce94bc0665" class=""><em>You can also view the waveform (wave.vcd) using vscode&#x27; plugin.</em></p><figure id="36fc0017-3a47-442c-9cf4-7006fbdf85a9" class="image"><a href="Auto%20Grading%20Assessment%20-%20MUX%20and%20Arithmetic%20Circu%20b65e42845114481f9dffcb3e6a59cc8b/sim01.png"><img style="width:1947px" src="Auto%20Grading%20Assessment%20-%20MUX%20and%20Arithmetic%20Circu%20b65e42845114481f9dffcb3e6a59cc8b/sim01.png"/></a></figure><figure id="b34ccd12-92ca-4244-9bec-9c8c7f1fc013" class="image"><a href="Auto%20Grading%20Assessment%20-%20MUX%20and%20Arithmetic%20Circu%20b65e42845114481f9dffcb3e6a59cc8b/sim02.png"><img style="width:2136px" src="Auto%20Grading%20Assessment%20-%20MUX%20and%20Arithmetic%20Circu%20b65e42845114481f9dffcb3e6a59cc8b/sim02.png"/></a></figure><p id="5dd880ad-64d5-4671-82b2-142758911b49" class="">
 </p><p id="3e6d938a-dbe1-4927-826a-ca711b238712" class=""><em>Run the testing script to validate your solution.</em></p><pre id="49029154-6e14-473e-90be-dc3ee8b90505" class="code code-wrap"><code>[ex03]$ python ../testing.py
 Compilation successful.
 VCD info: dumpfile wave.vcd opened for output.
@@ -810,9 +800,8 @@ VCD info: dumpfile wave.vcd opened for output.
              9900000 25 f0 5 0 d5
             10000000 91 0f 0 0 00
 
-Test PASSED.
-</code></pre><p id="52635480-c056-4506-aa69-0059fa8c0909" class="">
+Test PASSED.</code></pre><p id="52635480-c056-4506-aa69-0059fa8c0909" class="">
 </p><figure id="a8e71b57-c403-40a6-8a68-108bd0b91e9f" class="image"><a href="Auto%20Grading%20Assessment%20-%20MUX%20and%20Arithmetic%20Circu%20b65e42845114481f9dffcb3e6a59cc8b/1.png"><img style="width:1500px" src="Auto%20Grading%20Assessment%20-%20MUX%20and%20Arithmetic%20Circu%20b65e42845114481f9dffcb3e6a59cc8b/1.png"/></a></figure><p id="8fc589ec-0655-43c9-a073-94347615ecc7" class="">
-</p></div></article>
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span>
 <script>hljs.highlightAll();</script>
 </body></html>
